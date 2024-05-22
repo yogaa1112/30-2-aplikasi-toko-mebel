@@ -6,7 +6,9 @@ const path = require('path');
 const cors = require('cors');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
-const logger = require('morgan')
+const logger = require('morgan');
+const { type } = require('os');
+const { log } = require('console');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -37,6 +39,85 @@ app.post('/upload', upload.single('produk'),(req,res)=>{
         success : 1,
         image_url : `http://localhost:${port}/images/${req.file.filename}`
     })
+})
+
+
+// Schema untuk membuat Produk
+
+const Product = mongoose.model("Produk", {
+    id : {
+        type : Number,
+        required : true
+    },
+    name : {
+        type : String,
+        required : true,
+    },
+    image : {
+        type : String,
+        required : true,
+    },
+    category : {
+        type : String,
+        required : true
+    },
+    price : {
+        type : Number,
+        required : true
+    },
+    date : {
+        type : Date,
+        default : Date.now
+    },
+    available : {
+        type : Boolean,
+        default : true
+    },
+})
+
+//menambahkan produk
+app.post('/addproduct', async(req, res)=>{
+    let products = await Product.find({});
+    let id;
+    if(products.length>0){
+        let last_product_array = products.slice(-1);
+        let last_product = last_product_array[0];
+        id = last_product.id + 1;
+    }
+    const product = new Product({
+        id : id,
+        name : req.body.name,
+        image : req.body.image,
+        category : req.body.category,
+        price : req.body.price,
+    });
+    console.log(product);
+    await product.save();
+    console.log("Saved")
+
+    res.json({
+        success : true,
+        name : req.body.name,
+    })
+})
+
+//menghapus produk
+app.post('/removeproduct', async(req, res)=>{
+    await Product.findOneAndDelete({id:req.body.id});
+    console.log("removed")
+
+    res.json({
+        success : true,
+        name : req.body.name
+    })
+})
+
+//menampilkan semua produk
+
+app.get('/allproducts', async(req, res)=>{
+    let products = await Product.find({});
+    console.log("semua Produk diambil")
+    res.send(products)
 })
 
 app.listen(port, (err)=>{
