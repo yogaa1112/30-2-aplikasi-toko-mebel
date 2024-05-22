@@ -6,7 +6,9 @@ const path = require('path');
 const cors = require('cors');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
+const logger = require('morgan')
 
+app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 
