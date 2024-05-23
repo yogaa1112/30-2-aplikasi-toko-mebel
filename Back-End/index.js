@@ -57,7 +57,13 @@ const Product = mongoose.model("Produk", {
         type : String,
         required : true,
     },
+    //office / school / home
     category : {
+        type : String,
+        required : true
+    },
+    //Meja, Kursi, lemari, rak, dll.
+    sub_category : {
         type : String,
         required : true
     },
@@ -89,6 +95,7 @@ app.post('/addproduct', async(req, res)=>{
         name : req.body.name,
         image : req.body.image,
         category : req.body.category,
+        sub_category : req.body.sub_category,
         price : req.body.price,
     });
     console.log(product);
@@ -119,6 +126,30 @@ app.get('/allproducts', async(req, res)=>{
     console.log("semua Produk diambil")
     res.send(products)
 })
+
+//Endpoint untuk search bar
+app.get('/search', async (req, res) => {
+    const query = req.query.query;
+    try {
+      const results = await Product.find({
+        $or: [
+          { name: new RegExp(query, 'i') },
+          { category: new RegExp(query, 'i') },
+          { sub_category: new RegExp(query, 'i') },
+        ],
+    });
+    if(results.length === 0){
+        res.send("No results found")
+
+    }
+    else
+    {
+        res.json(results);
+    }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
 
 app.listen(port, (err)=>{
     if(!err){
