@@ -8,7 +8,7 @@ const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const logger = require('morgan');
 const { type } = require('os');
-const { log } = require('console');
+const { log, error } = require('console');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -139,6 +139,7 @@ app.get('/search', async (req, res) => {
         ],
     });
     if(results.length === 0){
+        
         res.send("No results found")
 
     }
@@ -150,6 +151,87 @@ app.get('/search', async (req, res) => {
       res.status(500).send(error);
     }
   });
+
+  //Skema untuk model User
+  const Users = mongoose.model('Users',{
+    name : {
+        type : String,
+
+    },
+    email : {
+        type : String,
+        unique : true
+    },
+    password : {
+        type : String,
+
+    },
+    cartData : {
+        type : Object,
+
+    },
+    date : {
+        type : Date,
+        default : Date.now,
+    }
+  })
+
+  //Membuat Enpoint untuk register User
+  app.post('/signup', async(req, res)=>{
+    //Mengecheck apakah email sudah dipakai di dalam database
+    let check = await Users.findOne({email:req.body.email});
+    if(check){
+        return res.status(400).json({success:false, error:"Email sudah dipakai!"})
+    }
+
+    let cart = {};
+    for ( let i = 0; i<300; i++){
+        cart[1] = 0;
+    }
+
+    const user = new Users({
+        name : req.body.name,
+        email : req.body.email,
+        password : req.body.password,
+        cart : cart
+    })
+    //simpan user di database
+    await user.save();
+
+    const data = {
+        user:{
+            id : user.id
+        }
+    }
+
+    const token = jwt.sign(data, 'secret_ecom');
+    res.json({success : true, token})
+    
+  })
+
+//Membuat API untuk User login
+app.post('/login', async(req, res)=>{
+    //mencari email user di database
+    let user = await Users.findOne({email: req.body.email});
+    if(user){
+        //membandingkan password yang dimasukan oleh user dengan password yang ada di database
+        const passCompare = req.body.password === user.password;
+        if(passCompare){
+            const data = {
+                user : {
+                    id : user.id
+                }
+            }
+            const token = jwt.sign(data, 'secret_ecom');
+            res.json({succes:true, token})
+        }
+        else{
+            res.json({success:false, error:"Password anda salah!"})
+        }
+    }else{
+        res.json({success:false, error:"Email anda salah!"})
+    }
+})
 
 app.listen(port, (err)=>{
     if(!err){
