@@ -1,7 +1,7 @@
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
+import Shop from "./Pages/Shop";
 import ShopCategory from "./Pages/ShopCategory";
 import Product from "./Pages/Product";
 import Cart from "./Pages/Cart"
@@ -15,10 +15,10 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Shop />} />
+          <Route path="/home" element={<ShopCategory category="home" />} />
           <Route path="/office" element={<ShopCategory category="office" />} />
-          <Route path="/kicthen" element={<ShopCategory category="kitchen" />} />
-          <Route path="/living" element={<ShopCategory category="living" />} />
+          <Route path="/kitchen" element={<ShopCategory category="kitchen" />} />
           <Route path="/product" element={<Product />}>
             <Route path="/productId" element={<Product />} />
           </Route>

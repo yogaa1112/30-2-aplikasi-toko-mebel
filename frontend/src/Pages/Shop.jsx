@@ -6,7 +6,7 @@ import Offers from '../Components/Offers/Offers'
 import NewCollections from '../Components/NewCollections/NewCollections'
 
 
-const Home = () => {
+const Shop = () => {
   return (
     <div>
       <Hero />
@@ -18,4 +18,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Shop;
