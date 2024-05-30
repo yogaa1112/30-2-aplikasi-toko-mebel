@@ -9,13 +9,14 @@ const jwt = require('jsonwebtoken');
 const logger = require('morgan');
 const { type } = require('os');
 const { log, error } = require('console');
+const connect = require('./library/db.js')
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 
-//Koneksi ke database mongoDB
-mongoose.connect('mongodb+srv://fery-ale:Capstone@cluster0.c8jg4an.mongodb.net/mebel')
+
+
 
 app.get('/', (req,res)=>{
     res.send('App berjalan')
@@ -233,8 +234,10 @@ app.post('/login', async(req, res)=>{
     }
 })
 
-app.listen(port, (err)=>{
+app.listen(port, async(err)=>{
     if(!err){
+        //Koneksi ke database mongoDB
+        await connect ();
         console.log("Server berjalan pada port " +port)
     }
     else
