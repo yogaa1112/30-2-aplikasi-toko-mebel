@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
+const dotenv = require('dotenv')
 
-const url = 'mongodb+srv://fery-ale:Capstone@cluster0.c8jg4an.mongodb.net/mebel'
+dotenv.config();
+
+const url = process.env.DB_URI
 
 const connect = async ()=>{
     try {
