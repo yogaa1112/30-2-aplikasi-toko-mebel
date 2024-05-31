@@ -14,7 +14,6 @@ const connect = require('./library/db.js')
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
-// app.use(nodemon('dev'));
 
 
 
@@ -187,14 +186,14 @@ app.get('/search', async (req, res) => {
 
     let cart = {};
     for ( let i = 0; i<300; i++){
-        cart[1] = 0;
+        cart[i] = 0;
     }
 
     const user = new Users({
         name : req.body.name,
         email : req.body.email,
         password : req.body.password,
-        cart : cart,
+        cartData : cart,
     })
     //simpan user di database
     await user.save();
