@@ -14,7 +14,7 @@ const connect = require('./library/db.js')
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
-
+// app.use(nodemon('dev'));
 
 
 
@@ -194,7 +194,7 @@ app.get('/search', async (req, res) => {
         name : req.body.name,
         email : req.body.email,
         password : req.body.password,
-        cart : cart
+        cart : cart,
     })
     //simpan user di database
     await user.save();
@@ -232,6 +232,24 @@ app.post('/login', async(req, res)=>{
     }else{
         res.json({success:false, error:"Email anda salah!"})
     }
+})
+
+// endpoint untuk New Collections
+app.get('/new-collections', async (req, res)=>{
+    let products = await Product.find({});
+    let new_collection = products.slice(1).slice(-8);
+
+    console.log('NewCollection Fetched')
+    res.send(new_collection);
+})
+
+// endpoint untuk popular in office
+app.get('/popular-in-office', async(req, res)=>{
+    let product = await Product.find({category:"office"})
+    let popular_in_office = product.slice(0, 4);
+
+    console.log('Popular in Office fetched');
+    res.send(popular_in_office);
 })
 
 app.listen(port, async(err)=>{
