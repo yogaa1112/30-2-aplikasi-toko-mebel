@@ -9,8 +9,8 @@ const AddProduct = () => {
     name: "",
     image:"",
     category:"office",
-    new_price:"",
-    old_price:""
+    sub_category:"",
+    price:""
   })
 
   const imageHandler = (e) => {
@@ -26,13 +26,12 @@ const AddProduct = () => {
     let product = productDetails;
 
     let formData = new FormData();
-    formData.append('product', image);
+    formData.append('produk', image);
 
-    //ini nyatuin sama halaman user (fontend) ini masih contoh aja
-    await fetch('http://localhost:3000/upload', {
-      method:'POST',
-      headers:{
-          Accept: 'application/json',
+    await fetch('http://localhost:4000/upload', {
+        method:'POST',
+        headers:{
+        Accept: 'application/json',
       },
       body:formData,
     }).then((resp)=>resp.json()).then((data)=>{responseData=data})
@@ -41,7 +40,7 @@ const AddProduct = () => {
     {
       product.image = responseData.image_url;
       console.log(product);
-      await fetch('http://localhost:3000/addproduct',{
+      await fetch('http://localhost:4000/addproduct',{
         method:'POST',
         headers:{
           Accept:'application/json',
@@ -64,11 +63,7 @@ const AddProduct = () => {
        <div className="addproduct-price">
             <div className="addproduct-itemfield">
                 <p>Price</p>
-                <input value={productDetails.old_price} onChange={changeHandler} type="text" name='old_price' placeholder='type here' />
-            </div>
-            <div className="addproduct-itemfield">
-                <p>Offer Price</p>
-                <input value={productDetails.new_price} onChange={changeHandler} type="text" name='new_price' placeholder='type here' />
+                <input value={productDetails.price} onChange={changeHandler} type="text" name='price' placeholder='type here' />
             </div>
        </div>
        <div className="addproduc-itemfield">
@@ -76,9 +71,35 @@ const AddProduct = () => {
             <select value={productDetails.category} onChange={changeHandler} name="category" className='add-product-selector' id="">
                 <option value="Office">Office</option>
                 <option value="home">Home</option>
-                <option value="school">School</option>
+                <option value="living">Living</option>
+                <option value="kitchen">kitchen</option>
+                <option value="bedroom">Bedroom</option>
             </select>
        </div>
+       <div className="addproduct-itemfield">
+        <p>Product Sub-Category</p>
+        <select value={productDetails.sub_category} onChange={changeHandler} name="sub_category" className='add-product-selector'>
+          <option value="sofa">Sofa</option>
+          <option value="kursi">Kursi</option>
+          <option value="meja kopi">Meja Kopi</option>
+          <option value="rak buku">Rak Buku</option>
+          <option value="meja makan">Set Meja Makan</option>
+          <option value="Bufet">Bufet</option>
+          <option value="tempat tidur">Tempat Tidur</option>
+          <option value="lemari">Lemari Pakaian</option>
+          <option value="meja rias">Meja Rias</option>
+          <option value="meja belajar">Meja Belajar</option>
+          <option value="nakas">Nakas</option>
+          <option value="meja kantor">Meja Kantor</option>
+          <option value="kursi kantor">Kursi Kantor</option>
+          <option value="rak arsip">Rak Arsip</option>
+          <option value="kursi bar">Kursi Bar</option>
+          <option value="rak penyimpanan">Rak Penyimpanan</option>
+          <option value="kitchen set">Kitchen Set</option>
+          <option value="meja rias">Meja Rias</option>
+          <option value="aksesoris dekorasi">Aksesoris & Dekorasi</option>
+        </select>
+      </div>
        <div className="addproduct-itemfield">
           <label htmlFor="file-input">
               <img src={image?URL.createObjectURL(image):upload_area} className='addproduct-thumnail-img' alt="" />

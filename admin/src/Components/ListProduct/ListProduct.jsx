@@ -7,7 +7,7 @@ const ListProduct = () => {
     const [allproducts,setAllProducts] = useState([]);
 
     const fetchInfo = async ()=>{
-      await fetch ('http://localhost:3000/allproducts')
+      await fetch ('http://localhost:4000/allproducts')
       .then((res)=>res.json())
       .then((data)=>{setAllProducts(data)});
     }
@@ -16,9 +16,9 @@ const ListProduct = () => {
       fetchInfo();
     }, [])
 
-    const remove_product = async()=>{
-      await fetch('http://localhost:3000/removeproduct', {
-        method:'POST',
+    const remove_product = async(id)=>{
+      await fetch('http://localhost:4000/removeproduct', {
+        method:'DELETE',
         headers:{
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -34,9 +34,9 @@ const ListProduct = () => {
        <div className="listproduct-format-main">
         <p>Product</p>
         <p>Title</p>
-        <p>Old Price</p>
-        <p>New Price</p>
+        <p>Price</p>
         <p>Category</p>
+        <p>Sub Category</p>
         <p>Remove</p>
        </div>
        <div className="listproduct-allproduct">
@@ -46,9 +46,9 @@ const ListProduct = () => {
             <div key={index} className="listproduct-format-main listproduct-format">
               <img src={product.image} alt="" className="listproduct-product-icon" />
               <p>{product.name}</p>
-              <p>${product.old_price}</p>
-              <p>${product.new_price}</p>
+              <p>Rp{product.price}</p>
               <p>{product.category}</p>
+              <p>{product.sub_category}</p>
               <img onClick={()=>{remove_product(product.id)}} src={remove_icon} alt="" className="listproduct-remove-icon" />
             </div>
             <hr />
