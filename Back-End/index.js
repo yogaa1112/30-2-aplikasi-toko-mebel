@@ -251,6 +251,46 @@ app.get('/popular-in-office', async(req, res)=>{
     res.send(popular_in_office);
 })
 
+// membuat middleware untuk mengambil user
+const fetchUser = async (req, res, next)=>{
+    const token = req.header('auth-token');
+    if(!token) return res.status(401).send({errors:"Token is not valid!"});
+    try {
+        const data = jwt.verify(token, 'secret_ecom');
+        req.user = data.user;
+        next();
+    } catch (error) {
+        res.status(401).send({errors:" token tidak valid"})
+    }
+}
+
+// endpoint untuk Menambahkan item ke cart di database
+app.post('/addtocart',fetchUser, async(req, res)=>{
+    console.log("Added", req.body.id)
+    let userData = await Users.findOne({_id:req.user.id});
+    userData.cartData[req.body.itemId] += 1;
+
+    await Users.findOneAndUpdate({_id:req.user.id}, {cartData : userData.cartData});
+    res.send('Added');
+})
+
+// endpoint untuk menghapus produk dari cart
+app.post('/removefromcart', fetchUser, async(req, res)=>{
+    console.log("removed", req.body.id)
+    let userData = await Users.findOne({_id:req.user.id});
+    if(userData.cartData[req.body.itemId] > 0)
+        userData.cartData[req.body.itemId] -= 1;
+        await Users.findOneAndUpdate({_id:req.user.id}, {cartData : userData.cartData});
+        res.send('deleted');
+})
+
+// membuat endpoint untuk mendapat cart data saat login
+app.post('/getcart', fetchUser, async(req, res)=>{
+    console.log('Get cart');
+    let userData = await Users.findOne({_id:req.user.id});
+    res.json(userData.cartData);
+})
+
 app.listen(port, async(err)=>{
     if(!err){
         //Koneksi ke database mongoDB
