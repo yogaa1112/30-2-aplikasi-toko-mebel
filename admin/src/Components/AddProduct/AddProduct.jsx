@@ -29,9 +29,9 @@ const AddProduct = () => {
     formData.append('produk', image);
 
     await fetch('http://localhost:4000/upload', {
-        method:'POST',
-        headers:{
-        Accept: 'application/json',
+      method:'POST',
+      headers:{
+          Accept: 'application/json',
       },
       body:formData,
     }).then((resp)=>resp.json()).then((data)=>{responseData=data})
