@@ -44,7 +44,7 @@ app.post('/upload', upload.single('produk'),(req,res)=>{
 
 // Schema untuk membuat Produk
 
-const Product = mongoose.model("Produk", {
+const Product = mongoose.model("produk", {
     id : {
         type : Number,
         required : true
@@ -84,7 +84,7 @@ const Product = mongoose.model("Produk", {
 //menambahkan produk
 app.post('/addproduct', async(req, res)=>{
     let products = await Product.find({});
-    let id;
+    let id = 1;
     if(products.length>0){
         let last_product_array = products.slice(-1);
         let last_product = last_product_array[0];
@@ -109,7 +109,7 @@ app.post('/addproduct', async(req, res)=>{
 })
 
 //menghapus produk
-app.post('/removeproduct', async(req, res)=>{
+app.delete('/removeproduct', async(req, res)=>{
     await Product.findOneAndDelete({id:req.body.id});
     console.log("removed")
 
