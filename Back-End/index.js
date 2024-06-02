@@ -155,7 +155,7 @@ app.get('/search', async (req, res) => {
       res.status(500).send(error);
     }
   });
-
+  
 // endpoint untuk New Collections
 app.get('/new-collections', async (req, res)=>{
     let products = await Product.find({});
