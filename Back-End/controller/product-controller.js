@@ -1,7 +1,7 @@
-const Product = require('../model/Product.js'); // Adjust the path to your Product model
-const Users = require('../model/user.js'); // Adjust the path to your Users model
+const Product = require('../model/Product.js'); 
+const Users = require('../model/user.js'); 
 
-// Controller to add item to cart
+// Controller untuk menambahkan Item di cart
 const addToCart = async (req, res) => {
     console.log("Added", req.body.itemId);
 
@@ -21,7 +21,7 @@ const addToCart = async (req, res) => {
     }
 };
 
-// Controller to remove item from cart
+// Controller untuk menghapus item dari cart
 const removeFromCart = async (req, res) => {
     console.log("Removed", req.body.itemId);
 
@@ -49,7 +49,7 @@ const removeFromCart = async (req, res) => {
     }
 };
 
-// Controller to add product
+// Controller untuk menambahkan product
 const addProduct = async (req, res) => {
     let products = await Product.find({});
     let id = 1;
@@ -76,7 +76,7 @@ const addProduct = async (req, res) => {
     });
 };
 
-// Controller to remove product
+// Controller untuk menghapus produk di database
 const removeProduct = async (req, res) => {
     await Product.findOneAndDelete({ id: req.body.id });
     console.log("removed")
@@ -87,14 +87,14 @@ const removeProduct = async (req, res) => {
     });
 };
 
-// Controller to get all products
+// Controller mengambil semua produk di database
 const getAllProducts = async (req, res) => {
     let products = await Product.find({});
     console.log("semua Produk diambil")
     res.send(products);
 };
 
-// Controller to search products
+// Controller untuk mencari produk yang sesuai yang diketik
 const searchProducts = async (req, res) => {
     const query = req.query.query;
     try {
@@ -115,7 +115,7 @@ const searchProducts = async (req, res) => {
     }
 };
 
-// Controller to get new collections
+// Controller untuk mendapatkan koleksi baru
 const getNewCollections = async (req, res) => {
     let products = await Product.find({});
     let new_collection = products.slice(1).slice(-8);
@@ -124,7 +124,7 @@ const getNewCollections = async (req, res) => {
     res.send(new_collection);
 };
 
-// Controller to get popular in office products
+// Controller untuk mendapatkan produk popular di office
 const getPopularInOffice = async (req, res) => {
     let product = await Product.find({ category: "office" });
     let popular_in_office = product.slice(0, 4);
