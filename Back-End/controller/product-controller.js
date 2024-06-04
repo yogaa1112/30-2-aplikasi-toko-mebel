@@ -1,5 +1,6 @@
 const Product = require('../model/Product.js'); 
-const Users = require('../model/user.js'); 
+const Users = require('../model/user.js');
+const port = 4000;
 
 // Controller untuk menambahkan Item di cart
 const addToCart = async (req, res) => {
@@ -133,6 +134,13 @@ const getPopularInOffice = async (req, res) => {
     res.send(popular_in_office);
 };
 
+const UploadIMG = (req,res)=>{
+    res.json({
+        success : 1,
+        image_url : `http://localhost:${port}/images/${req.file.filename}`
+    })
+}
+
 module.exports = {
     addToCart,
     removeFromCart,
@@ -142,4 +150,5 @@ module.exports = {
     getNewCollections,
     getPopularInOffice,
     searchProducts,
+    UploadIMG,
 }

@@ -8,10 +8,13 @@ const {
     getAllProducts, 
     searchProducts, 
     getNewCollections, 
-    getPopularInOffice 
+    getPopularInOffice,
+    UploadIMG, 
 } = require('../controller/product-controller.js');
 const fetchUser = require('../middleware/fetchUser.js')
+const upload = require('../middleware/UploadImg.js')
 
+router.post('/upload', upload.single('produk'), UploadIMG)
 // Cart routes
 router.post('/addtocart', fetchUser, addToCart);
 router.post('/removefromcart', fetchUser, removeFromCart);
