@@ -1,9 +1,7 @@
 const port = 4000;
 const express = require('express');
 const app = express();
-const path = require('path');
 const cors = require('cors');
-const multer = require('multer');
 const logger = require('morgan');
 const { type } = require('os');
 const { log, error } = require('console');
