@@ -14,12 +14,12 @@ const {
 const fetchUser = require('../middleware/fetchUser.js')
 const upload = require('../middleware/UploadImg.js')
 
-router.post('/upload', upload.single('produk'), UploadIMG)
 // Cart routes
 router.post('/addtocart', fetchUser, addToCart);
 router.post('/removefromcart', fetchUser, removeFromCart);
 
 // Product routes
+router.post('/upload', upload.single('produk'), UploadIMG)
 router.post('/addproduct', addProduct);
 router.delete('/removeproduct', removeProduct);
 router.get('/allproducts', getAllProducts);
