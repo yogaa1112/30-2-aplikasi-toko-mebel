@@ -134,7 +134,7 @@ let all_product = [
   },
   {
     id: 13,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p13_img,
     new_price: 85.0,
@@ -142,7 +142,7 @@ let all_product = [
   },
   {
     id: 14,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p14_img,
     new_price: 85.0,
@@ -150,7 +150,7 @@ let all_product = [
   },
   {
     id: 15,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p15_img,
     new_price: 85.0,
@@ -158,7 +158,7 @@ let all_product = [
   },
   {
     id: 16,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p16_img,
     new_price: 85.0,
@@ -166,7 +166,7 @@ let all_product = [
   },
   {
     id: 17,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p17_img,
     new_price: 85.0,
@@ -174,7 +174,7 @@ let all_product = [
   },
   {
     id: 18,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p18_img,
     new_price: 85.0,
@@ -182,7 +182,7 @@ let all_product = [
   },
   {
     id: 19,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p19_img,
     new_price: 85.0,
@@ -190,7 +190,7 @@ let all_product = [
   },
   {
     id: 20,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p20_img,
     new_price: 85.0,
@@ -198,7 +198,7 @@ let all_product = [
   },
   {
     id: 21,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p21_img,
     new_price: 85.0,
@@ -206,7 +206,7 @@ let all_product = [
   },
   {
     id: 22,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p22_img,
     new_price: 85.0,
@@ -214,7 +214,7 @@ let all_product = [
   },
   {
     id: 23,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p23_img,
     new_price: 85.0,
@@ -222,7 +222,7 @@ let all_product = [
   },
   {
     id: 24,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     category: "office",
     image: p24_img,
     new_price: 85.0,
@@ -230,7 +230,7 @@ let all_product = [
   },
   {
     id: 25,
-    name: "kitchen chimney",
+    name: "Kitchen Chimney",
     category: "kitchen",
     image: p25_img,
     new_price: 85.0,
@@ -238,7 +238,7 @@ let all_product = [
   },
   {
     id: 26,
-    name: "kitchen dish rack",
+    name: "Kitchen Dish Rack",
     category: "kitchen",
     image: p26_img,
     new_price: 85.0,
@@ -246,7 +246,7 @@ let all_product = [
   },
   {
     id: 27,
-    name: "kitchen hanger",
+    name: "Kitchen Hanger",
     category: "kitchen",
     image: p27_img,
     new_price: 85.0,
@@ -254,7 +254,7 @@ let all_product = [
   },
   {
     id: 28,
-    name: "knife holder",
+    name: "Knife Holder",
     category: "kitchen",
     image: p28_img,
     new_price: 85.0,
@@ -262,7 +262,7 @@ let all_product = [
   },
   {
     id: 29,
-    name: "electric stove",
+    name: "Electric Stove",
     category: "kitchen",
     image: p29_img,
     new_price: 85.0,
@@ -286,7 +286,7 @@ let all_product = [
   },
   {
     id: 32,
-    name: "kitchen cabinets",
+    name: "Kitchen Cabinets",
     category: "kitchen",
     image: p32_img,
     new_price: 85.0,
@@ -294,7 +294,7 @@ let all_product = [
   },
   {
     id: 33,
-    name: "a set of dining tables",
+    name: "Dining Tables",
     category: "kitchen",
     image: p33_img,
     new_price: 85.0,
@@ -302,7 +302,7 @@ let all_product = [
   },
   {
     id: 34,
-    name: "dining table",
+    name: "Dining Table",
     category: "kitchen",
     image: p34_img,
     new_price: 85.0,
@@ -310,7 +310,7 @@ let all_product = [
   },
   {
     id: 35,
-    name: "dish rack",
+    name: "Dish Rack",
     category: "kitchen",
     image: p35_img,
     new_price: 85.0,
@@ -318,7 +318,7 @@ let all_product = [
   },
   {
     id: 36,
-    name: "kitchen sink",
+    name: "Kitchen Sink",
     category: "kitchen",
     image: p36_img,
     new_price: 85.0,
