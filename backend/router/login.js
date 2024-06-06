@@ -5,6 +5,6 @@ const fetchUser = require('../middleware/fetchUser.js')
 
 //Membuat API untuk User login
 router.post('/', login);
-router.get('/admin', admin)
+// router.get('/admin', fetchUser, admin)
 
 module.exports = router;

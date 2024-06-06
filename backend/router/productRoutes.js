@@ -19,7 +19,7 @@ router.post('/addtocart', fetchUser, addToCart);
 router.post('/removefromcart', fetchUser, removeFromCart);
 
 // Product routes
-router.post('/upload', fetchUser, upload.single('produk'), UploadIMG)
+router.post('/upload', upload.single('produk'), UploadIMG)
 router.post('/addproduct',fetchUser, addProduct);
 router.delete('/removeproduct', fetchUser, removeProduct);
 router.get('/allproducts', getAllProducts);
