@@ -17,14 +17,14 @@ let new_collections = [
   },
   {
     id: 35,
-    name: "dish rack",
+    name: "Dish rack",
     image: p2_img,
     new_price: 85.0,
     old_price: 120.5,
   },
   {
     id: 14,
-    name: "office Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     image: p3_img,
     new_price: 60.0,
     old_price: 100.5,
@@ -38,7 +38,7 @@ let new_collections = [
   },
   {
     id: 15,
-    name: "Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     image: p5_img,
     new_price: 50.0,
     old_price: 80.5,
@@ -52,7 +52,7 @@ let new_collections = [
   },
   {
     id: 17,
-    name: "Men Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
+    name: "Table",
     image: p7_img,
     new_price: 60.0,
     old_price: 100.5,
