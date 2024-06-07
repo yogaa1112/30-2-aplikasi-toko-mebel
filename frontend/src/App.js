@@ -5,8 +5,8 @@ import Shop from "./Pages/Shop";
 import ShopCategory from "./Pages/ShopCategory";
 import Product from "./Pages/Product";
 import Cart from "./Pages/Cart"
+import Footer from './Components/Footer/Footer'
 import LoginSignup from "./Pages/LoginSignup";
-import Footer from "./Components/Footer/Footer";
 import home_banner from "./Components/Assets/home.png"
 import office_banner from "./Components/Assets/office.png"
 import kitchen_banner from "./Components/Assets/kitchen.png"
@@ -28,7 +28,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/Login" element={<LoginSignup />} />
         </Routes>
-        <Footer />
+        <Footer/>
       </BrowserRouter>
     </div>
   );

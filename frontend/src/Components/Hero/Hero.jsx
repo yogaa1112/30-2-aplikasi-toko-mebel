@@ -1,25 +1,18 @@
-import React from 'react'
-import './Hero.css'
-import arrow_icon from '../Assets/arrow.png'
-import hero_image from '../Assets/hero_image.png'
+import React from 'react';
+import './Hero.css';
 
 const Hero = () => {
   return (
     <div className='hero'>
-      <div className="hero-left">
+      <div className="hero-tagline">
         <h2>NEW ARRIVALS ONLY</h2>
-        <div className="hero-hand-icon">
+        <div className="hero-words">
           <p>NEW</p>
+          <p>COLLECTIONS</p>
+          <p>FOR</p>
+          <p>EVERYONE</p>
         </div>
-        <p>COLLECTIONS</p>
-        <p>FOR EVERYONE</p>
       </div>
-      <div className="hero-latest-btn">
-        <div>Latest Collections</div>
-        <img src={arrow_icon} alt="" />
-      </div>
-      <div className="hero-right"></div>
-      <img src={hero_image} alt="" />
     </div>
   );
 };
