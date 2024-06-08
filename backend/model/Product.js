@@ -13,7 +13,7 @@ const Product = mongoose.model("produk", {
         type : String,
         required : true,
     },
-    //office / school / home
+    //Office / Living / home
     category : {
         type : String,
         required : true
