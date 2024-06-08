@@ -1,5 +1,7 @@
 .item {
     width: 250px;
+    height: auto;
+    padding: 30px;
 }
 
 .item p {
