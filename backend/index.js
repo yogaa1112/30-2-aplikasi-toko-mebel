@@ -10,6 +10,8 @@ const connect = require('./library/db.js')
 const loginRouter = require('./router/login.js');
 const signupRouter = require('./router/signup.js')
 const productRouter = require('./router/productRoutes.js')
+const adminLoginRouter = require('./router/adminLoginRoutes.js')
+const adminSignupRouter = require('./router/adminSignupRoutes.js')
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,6 +26,8 @@ app.use('/images', express.static('upload/images'))
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/', productRouter);
+app.use('/admin/login', adminLoginRouter);
+app.use('/admin/signup', adminSignupRouter);
 
 
 app.listen(port, async(err)=>{
