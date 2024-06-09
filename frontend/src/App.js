@@ -10,6 +10,7 @@ import LoginSignup from "./Pages/LoginSignup";
 import home_banner from "./Components/Assets/home.png"
 import office_banner from "./Components/Assets/office.png"
 import kitchen_banner from "./Components/Assets/kitchen.png"
+import CheckoutSuccess from "./Components/CheckoutSuccess/CheckoutSuccess";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/productId" element={<Product />} />
           </Route>
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route path="/Login" element={<LoginSignup />} />
         </Routes>
         <Footer/>
