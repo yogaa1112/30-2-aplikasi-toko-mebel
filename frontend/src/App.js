@@ -11,7 +11,6 @@ import home_banner from "./Components/Assets/home.png";
 import office_banner from "./Components/Assets/office.png"
 import kitchen_banner from "./Components/Assets/kitchen.png"
 import CheckoutSuccess from "./Components/CheckoutSuccess/CheckoutSuccess";
-import ProductDisplay from "./Components/ProductDisplay/ProductDisplay";
 
 
 function App() {
@@ -24,9 +23,7 @@ function App() {
           <Route path="/home" element={<ShopCategory banner={home_banner} category="home" />} />
           <Route path="/office" element={<ShopCategory banner={office_banner} category="office" />} />
           <Route path="/kitchen" element={<ShopCategory banner={kitchen_banner} category="kitchen" />} />
-          <Route path="/product" element={<Product />}>
-            <Route path="/productId" element={<ProductDisplay />} />
-          </Route>
+          <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route path="/Login" element={<LoginSignup />} />
