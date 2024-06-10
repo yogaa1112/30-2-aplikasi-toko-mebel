@@ -21,19 +21,27 @@ const upload = require('../middleware/UploadImg.js')
 router.post('/addtocart', fetchUser, addToCart);
 router.post('/removefromcart', fetchUser, removeFromCart);
 router.post('/checkout', async (req, res) => {
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'T-shirt',
-            },
-            unit_amount: 2000,
-          },
-          quantity: 1,
+
+  const line_items = req.body.cartItems.map(item =>{
+    return{
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: item.name,
+          images: [item.image],
+          description:item.category,
+          metadata: {
+            id: item.id
+          }
         },
-      ],
+        unit_amount: item.price,
+      },
+      quantity: item.quantity,
+    }
+  })
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items,
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/checkout-success`,
       cancel_url: `${process.env.CLIENT_URL}/cart`,
