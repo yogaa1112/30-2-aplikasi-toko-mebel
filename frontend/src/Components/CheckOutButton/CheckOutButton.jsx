@@ -3,6 +3,10 @@ import axios from 'axios'
 
 const CheckOutButton = ({cartItems}) => {
     const handleCheckout = ()=>{
+        if(!localStorage.getItem('auth-token')){
+            alert("Please Login first")
+            window.location.href = '/login';
+        }
         axios.post("http://localhost:4000/checkout", {
             cartItems,
 

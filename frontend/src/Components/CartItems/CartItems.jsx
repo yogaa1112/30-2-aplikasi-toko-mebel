@@ -52,7 +52,12 @@ const CartItems = () => {
                 <p>Total</p>
                 <h3>Rp.{getTotalCartAmount()}</h3>
             </div>
-       <CheckOutButton cartItems={cartItemsList}/>
+            {cartItemsList.length > 0 ? (
+            <CheckOutButton cartItems={cartItemsList} />
+            ) : (
+              <button disabled>CHECK OUT</button>
+            )}
+        
         </div>
       <div className="cartitems-promocode">
         <p>if you have a promo code, Enter it here</p>
