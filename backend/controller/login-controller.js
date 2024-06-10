@@ -23,11 +23,11 @@ const login = async(req, res)=>{
           
         }
         else{
-            res.json({success:false, error:"Password anda salah!"})
+            res.json({success:false, error:"Email/Password anda salah!"})
         }
     }
     else{
-        res.json({success:false, error:"Email anda salah!"})
+        res.json({success:false, error:"Email/password anda salah!"})
     }
 }   
 
