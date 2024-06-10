@@ -26,8 +26,8 @@ app.use('/images', express.static('upload/images'))
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/', productRouter);
-app.use('/admin/login', adminLoginRouter);
-app.use('/admin/signup', adminSignupRouter);
+app.use('/adminLogin', adminLoginRouter);
+app.use('/adminSignup', adminSignupRouter);
 
 
 app.listen(port, async(err)=>{

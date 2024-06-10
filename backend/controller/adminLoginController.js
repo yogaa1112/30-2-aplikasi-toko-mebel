@@ -23,7 +23,7 @@ const adminLogin = async (req, res) => {
 
         const token = jwt.sign(data, process.env.SECRET_USER, { expiresIn: '1h' });
 
-        res.json({ success: true, token, url: 'http://localhost:5173/admin' });
+        res.json({ success: true, token, url: 'http://localhost:5173'});
     } catch (error) {
         res.status(500).json({ success: false, error: "Terjadi kesalahan pada server" });
     }

@@ -43,7 +43,7 @@ router.post('/checkout', async (req, res) => {
   });
 
 // Product routes
-router.post('/upload', upload.single('produk'), UploadIMG)
+router.post('/upload', fetchUser, upload.single('produk'), UploadIMG)
 router.post('/addproduct',fetchUser, addProduct);
 router.delete('/removeproduct', fetchUser, removeProduct);
 router.get('/allproducts', getAllProducts);
