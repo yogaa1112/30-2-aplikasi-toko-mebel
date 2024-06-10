@@ -1,7 +1,6 @@
 const express = require('express');
-const Stripe = require('stripe')
 require('dotenv').config();
-const stripe = Stripe(process.env.STRIPE_KEY)
+
 const router = express.Router();
 const {
     addToCart, 
@@ -14,41 +13,14 @@ const {
     getPopularInOffice,
     UploadIMG, 
 } = require('../controller/product-controller.js');
+const checkout = require('../controller/checkOutController.js')
 const fetchUser = require('../middleware/fetchUser.js')
 const upload = require('../middleware/UploadImg.js')
 
 // Cart routes
 router.post('/addtocart', fetchUser, addToCart);
 router.post('/removefromcart', fetchUser, removeFromCart);
-router.post('/checkout', async (req, res) => {
-
-  const line_items = req.body.cartItems.map(item =>{
-    return{
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.name,
-          images: [item.image],
-          description:item.category,
-          metadata: {
-            id: item.id
-          }
-        },
-        unit_amount: item.price,
-      },
-      quantity: item.quantity,
-    }
-  })
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items,
-      mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/checkout-success`,
-      cancel_url: `${process.env.CLIENT_URL}/cart`,
-    });
-  
-    res.send({url : session.url});
-  });
+router.post('/checkout', checkout)
 
 // Product routes
 router.post('/upload', upload.single('produk'), UploadIMG)
