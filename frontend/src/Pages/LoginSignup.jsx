@@ -31,8 +31,8 @@ const Loginsignup = () => {
     }).then((response)=> response.json()).then((data)=>responseData=data)
     if(responseData.succes){
       localStorage.setItem('auth-token',responseData.token);
+      console.log(responseData.url);
       if(responseData.url){
-        
         window.location.href = responseData.url
         return 0
       }

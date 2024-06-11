@@ -8,6 +8,7 @@ const login = async(req, res)=>{
         //membandingkan password yang dimasukan oleh user dengan password yang ada di database
         const passCompare = req.body.password === user.password;
         const isAdmin =  user.isAdmin;
+        let url = false
         if(passCompare){
             const data = {
                 user : {
@@ -15,12 +16,10 @@ const login = async(req, res)=>{
                 }
             }
             if(isAdmin){
-                let url = isAdmin ? 'http://localhost:5173/' : false;
-                AdminUrl = url
-                
+               url = 'http://localhost:5173/'
             }
             const token = jwt.sign(data, process.env.SECREET_USER);
-            res.json({succes:true, token, url:AdminUrl})
+            res.json({succes:true, token, url:url})
           
         }
         else{
@@ -32,18 +31,8 @@ const login = async(req, res)=>{
     }
 }   
 
-const admin = async(req, res)=>{
-    // let user = await Users.findOne({email: req.body.email});
-    // const data = {
-    //     user : {
-    //         id : user.id
-    //     }
-    // }
-    // const token = jwt.sign(data, process.env.SECREET_USER);
-    // res.json({succes:true, token})
-}
+
 
 module.exports = {
-    login,
-    admin
+    login
 };
