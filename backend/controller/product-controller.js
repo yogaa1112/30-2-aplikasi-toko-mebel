@@ -157,6 +157,21 @@ const UploadIMG = async(req,res)=>{
     }
 }
 
+const getProductById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const product = await Product.findOne({ id: Number(id) });
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        res.json({ product });
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+
 module.exports = {
     addToCart,
     removeFromCart,
@@ -167,4 +182,5 @@ module.exports = {
     getPopularInOffice,
     searchProducts,
     UploadIMG,
+    getProductById,
 }

@@ -37,4 +37,5 @@ const Product = mongoose.model("produk", {
     },
 })
 
+
 module.exports = Product;

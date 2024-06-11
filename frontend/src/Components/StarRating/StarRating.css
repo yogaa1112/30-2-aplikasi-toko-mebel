@@ -1,0 +1,10 @@
+/* src/Components/StarRating/StarRating.css */
+.star-rating {
+    display: flex;
+  }
+  
+  .star {
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+  }  

@@ -15,6 +15,7 @@ const {
 } = require('../controller/product-controller.js');
 const checkout = require('../controller/checkOutController.js')
 const fetchUser = require('../middleware/fetchUser.js')
+const { getProductById } = require('../controller/product-controller');
 const upload = require('../middleware/UploadImg.js')
 
 // Cart routes
@@ -28,6 +29,7 @@ router.post('/addproduct',fetchUser, addProduct);
 router.delete('/removeproduct', fetchUser, removeProduct);
 router.get('/allproducts', getAllProducts);
 router.get('/search', searchProducts);
+router.get('/product/:id', getProductById);
 router.get('/new-collections', getNewCollections);
 router.get('/popular-in-office', getPopularInOffice);
 

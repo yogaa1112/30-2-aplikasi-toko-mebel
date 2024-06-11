@@ -1,0 +1,53 @@
+/* src/Components/ReviewForm/ReviewForm.css */
+.reviewform {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .reviewform h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .reviewform .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .reviewform label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .reviewform input,
+  .reviewform select,
+  .reviewform textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .reviewform textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  .reviewform button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .reviewform button:hover {
+    background-color: #218838;
+  }  
