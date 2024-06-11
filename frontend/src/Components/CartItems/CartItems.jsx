@@ -9,6 +9,7 @@ const CartItems = () => {
     
     const cartItemsList = all_product.filter(cartItem => cartItems[cartItem.id] > 0)
     .map(cartItem => ({ ...cartItem, quantity: cartItems[cartItem.id] }));;
+    console.log(cartItemsList);
   return (
     <div className='cartitems'>
       <div className="cartitems-format-main">

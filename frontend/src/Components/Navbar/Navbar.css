@@ -79,7 +79,7 @@
     padding-top: 3px;
 }
 
-#login-icon {
+#login-icon, #logout-icon {
     width: auto;
     height: 24px;
     padding-top: 8px;

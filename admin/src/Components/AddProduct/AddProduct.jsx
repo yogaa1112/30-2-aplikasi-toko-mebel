@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 
@@ -19,7 +19,7 @@ const AddProduct = () => {
   const changeHandler = (e) =>{
     setProductDetails({...productDetails,[e.target.name]:e.target.value})
   }
-
+  const token = localStorage.getItem('auth-token')
   const Add_Product = async () =>{
     console.log(productDetails);
     let responseData;
@@ -32,6 +32,7 @@ const AddProduct = () => {
       method:'POST',
       headers:{
           Accept: 'application/json',
+          'auth-token' :token
       },
       body:formData,
     }).then((resp)=>resp.json()).then((data)=>{responseData=data})
@@ -45,6 +46,7 @@ const AddProduct = () => {
         headers:{
           Accept:'application/json',
           'Content-Type':'application/json',
+          'auth-token' :token
         },
         body:JSON.stringify(product),
       }).then((resp)=>resp.json()).then((data)=>{
