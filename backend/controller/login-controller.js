@@ -31,18 +31,8 @@ const login = async(req, res)=>{
     }
 }   
 
-const admin = async(req, res)=>{
-    // let user = await Users.findOne({email: req.body.email});
-    // const data = {
-    //     user : {
-    //         id : user.id
-    //     }
-    // }
-    // const token = jwt.sign(data, process.env.SECREET_USER);
-    // res.json({succes:true, token})
-}
+
 
 module.exports = {
-    login,
-    admin
+    login
 };
