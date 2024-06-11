@@ -28,7 +28,7 @@ const signup = async(req, res)=>{
         }
     }
 
-    const token = jwt.sign(data, process.env.SECREET_USER);
+    const token = jwt.sign(data, process.env.SECRET_USER);
     res.json({success : true, token})
     
   }
