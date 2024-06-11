@@ -8,7 +8,10 @@ const CartItems = () => {
     const {getTotalCartAmount, all_product, cartItems,removeFromCart} = useContext(ShopContext)
     
     const cartItemsList = all_product.filter(cartItem => cartItems[cartItem.id] > 0)
-    .map(cartItem => ({ ...cartItem, quantity: cartItems[cartItem.id] }));;
+    .map(cartItem => {
+      const { _id, __v, date, ...item } = cartItem; // Destructure _id and __v, and rest of the properties
+      return { ...item, quantity: cartItems[cartItem.id] }; // Spread rest of the properties and add quantity
+    });;
     console.log(cartItemsList);
   return (
     <div className='cartitems'>
