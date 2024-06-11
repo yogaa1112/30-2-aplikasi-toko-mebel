@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './CSS/LoginSignup.css';
 
 const Loginsignup = () => {
-
+  if(localStorage.getItem('auth-token')){
+    window.location.href = '/';
+  }
   // Nyambungin ke backend
   const [state,setState] = useState("Login");
   const [formData,setFormData] = useState({
@@ -16,7 +18,8 @@ const Loginsignup = () => {
 }
 
   const login = async () =>{
-    console.log("Login Sucses",formData);
+    
+    console.log("Login Success");
     let responseData;
     await fetch('http://localhost:4000/login',{
       method:'POST',
@@ -28,7 +31,14 @@ const Loginsignup = () => {
     }).then((response)=> response.json()).then((data)=>responseData=data)
     if(responseData.succes){
       localStorage.setItem('auth-token',responseData.token);
-      window.location.replace("/");
+      if(responseData.url){
+        
+        window.location.href = responseData.url
+        return 0
+      }
+      else{
+        window.location.replace("/");
+      }
     }
     else{
       alert(responseData.error)

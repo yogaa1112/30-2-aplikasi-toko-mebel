@@ -23,7 +23,7 @@ router.post('/removefromcart', fetchUser, removeFromCart);
 router.post('/checkout', checkout)
 
 // Product routes
-router.post('/upload', upload.single('produk'), UploadIMG)
+router.post('/upload', upload.single('produk'), fetchUser, UploadIMG)
 router.post('/addproduct',fetchUser, addProduct);
 router.delete('/removeproduct', fetchUser, removeProduct);
 router.get('/allproducts', getAllProducts);

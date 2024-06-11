@@ -10,6 +10,7 @@
 
 .nav-logo{
     width: 160px;
+    cursor: pointer;
 }
 
 .nav-profile{

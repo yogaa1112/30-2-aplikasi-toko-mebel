@@ -1,11 +1,12 @@
-import React, { useEffect,useState } from 'react'
+import { useEffect,useState } from 'react'
 import './ListProduct.css'
 import remove_icon from '../../assets/remove-icon.png'
 
 const ListProduct = () => {
 
     const [allproducts,setAllProducts] = useState([]);
-
+    
+    const token = localStorage.getItem('auth-token')
     const fetchInfo = async ()=>{
       await fetch ('http://localhost:4000/allproducts')
       .then((res)=>res.json())
@@ -22,6 +23,7 @@ const ListProduct = () => {
         headers:{
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'auth-token' : token
         },
         body:JSON.stringify({id:id})
       })
