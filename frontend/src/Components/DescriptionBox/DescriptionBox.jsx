@@ -9,14 +9,14 @@ const DescriptionBox = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/reviews/${productId}`)
+    fetch(`http://localhost:4000/api/reviews/${productId}`)
       .then(response => response.json())
       .then(data => setReviews(data))
       .catch(error => console.error('Error fetching reviews:', error));
   }, [productId]);
 
   const addReview = (review) => {
-    fetch('/api/reviews/add', {
+    fetch(' http://localhost:4000/api/reviews/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
