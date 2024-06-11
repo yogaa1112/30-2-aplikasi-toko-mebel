@@ -38,9 +38,9 @@ const Navbar = () => {
                     <Link to=''><img src={search_icon} alt="search" id="search_icon" /></Link>
                 </div>
                 {localStorage.getItem('auth-token')
-                    ? <button onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }}>
+                    ? <Link onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }}>
                         <img src={logout_icon} alt="logout" id="logout-icon" />
-                      </button>
+                      </Link>
                     : <Link to='/login'><img src={people_icon} alt="login" id="login-icon" /></Link>
                 }  
                 <Link to='/cart'><img src={cart_icon} alt="cart" id="cart-icon" /></Link>

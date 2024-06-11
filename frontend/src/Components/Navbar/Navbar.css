@@ -79,10 +79,16 @@
     padding-top: 3px;
 }
 
-#login-icon, #logout-icon {
+#login-icon {
     width: auto;
     height: 24px;
     padding-top: 8px;
+}
+
+#logout-icon {
+    width: auto;
+    height: 32px;
+    padding-top: 4px;
 }
 
 #cart-icon {
