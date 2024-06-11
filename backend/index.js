@@ -12,8 +12,10 @@ const signupRouter = require('./router/signup.js')
 const productRouter = require('./router/productRoutes.js')
 const adminLoginRouter = require('./router/adminLoginRoutes.js')
 const adminSignupRouter = require('./router/adminSignupRoutes.js')
+const WebhookRouter = require('./router/Whook.js')
 
 app.use(logger('dev'));
+app.use('/', WebhookRouter);
 app.use(express.json());
 app.use(cors());
 
