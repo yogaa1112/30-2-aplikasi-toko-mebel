@@ -9,17 +9,6 @@ const Order = require('../model/order.js')
 const createOrder = async(customer, data)=>{
     const Items = JSON.parse(customer.metadata.cart);
     
-    // const products = Items.map((item) => {
-    //     return {
-    //       productId: item.id,
-    //       name : item.name,
-    //       image : item.image,
-    //       category: item.category,
-    //       sub_category: item.sub_category,
-    //       price: item.price,
-    //       quantity: item.quantity,
-    //     };
-    //   });
     const newOrder = new Order({
         userId : customer.email,
         customerId: data.customer,
@@ -68,8 +57,8 @@ router.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
     // Handle the event
     if(eventType === "checkout.session.completed"){
         stripe.customers.retrieve(data.customer).then((customer)=>{
-                console.log(customer);
-                console.log('data:' , data);
+                // console.log(customer);
+                // console.log('data:' , data);
                 createOrder(customer, data)
             }
         ).catch(err=>console.log(err.message))
