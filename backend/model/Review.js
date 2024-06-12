@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
+  userId: {
+    type: String, // Menggunakan email pengguna
+    required: true
+  },
   productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product',
     required: true,
   },
-  name: {
-    type: String,
-    required: true,
+  paymentIntentId: {
+    type: String, // ID dari transaksi pembelian
+    required: true
   },
   rating: {
     type: Number,

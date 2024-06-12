@@ -1,32 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'; // Import useParams untuk mendapatkan parameter URL
 import './DescriptionBox.css';
 import ReviewForm from '../ReviewForm/ReviewForm';
 import StarRating from '../StarRating/StarRating';
+import axios from 'axios';
 
 const DescriptionBox = () => {
-  const { productId } = useParams();
+  const { productId } = useParams(); // Mendapatkan parameter URL productId dari React Router
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/reviews/${productId}`)
-      .then(response => response.json())
-      .then(data => setReviews(data))
-      .catch(error => console.error('Error fetching reviews:', error));
+    const fetchReviews = async () => {
+      try {
+        // Lakukan permintaan HTTP ke endpoint untuk mengambil review
+        const response = await axios.get(`http://localhost:4000/reviews/${productId}`);
+        const reviewsData = response.data; // Data review dari backend
+
+        setReviews(reviewsData);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+
+    fetchReviews();
   }, [productId]);
 
-  const addReview = (review) => {
-    fetch(' http://localhost:4000/api/reviews/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': localStorage.getItem('token') // Assuming token is stored in localStorage
-      },
-      body: JSON.stringify({ ...review, productId })
-    })
-      .then(response => response.json())
-      .then(newReview => setReviews([...reviews, newReview]))
-      .catch(error => console.error('Error adding review:', error));
+  const addReview = (newReview) => {
+    // Implementasi logika untuk menambah review ke database di sini
+    console.log("Menambah review:", newReview);
   };
 
   return (
@@ -37,7 +38,7 @@ const DescriptionBox = () => {
       <div className="descriptionbox-description">
         {reviews.map((review, index) => (
           <div key={index} className="review">
-            <p><strong>{review.name}</strong></p>
+            <p><strong>{review.userId}</strong></p>
             <StarRating rating={review.rating} />
             <p>{review.comment}</p>
           </div>

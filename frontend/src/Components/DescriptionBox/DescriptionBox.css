@@ -24,7 +24,7 @@
 .descriptionbox-description{
     display: flex;
     flex-direction: column;
-    gap: 25;
+    gap: 50px;
     border: 1px solid #d0d0d0;
     padding: 48px;
     padding-bottom: 70px;
