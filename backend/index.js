@@ -15,6 +15,7 @@ const adminSignupRouter = require('./router/adminSignupRoutes.js')
 const WebhookRouter = require('./router/Whook.js'); // Sesuaikan dengan path yang benar
 const reviewRouter = require ('./router/ReviewRoutes.js')
 const reviewController = require('./controller/ReviewController');
+const orderRouter = require('./router/OrderRoutes');
 
 app.use(logger('dev'));
 app.use('/', WebhookRouter);
@@ -30,6 +31,7 @@ app.use('/images', express.static('upload/images'))
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/reviews', reviewRouter);
+app.use('/api', orderRouter); 
 app.use('/', productRouter);
 app.use('/adminLogin', adminLoginRouter);
 app.use('/adminSignup', adminSignupRouter);
