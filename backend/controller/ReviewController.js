@@ -53,7 +53,6 @@ const removeReview = async (req, res) => {
       return res.status(404).json({ message: 'Review tidak ditemukan' });
     }
 
-    // Pastikan hanya pengguna yang membuat review yang bisa menghapusnya
     if (review.userId !== userId) {
       return res.status(403).json({ message: 'Tidak diizinkan menghapus review ini' });
     }
@@ -78,7 +77,6 @@ const editReview = async (req, res) => {
       return res.status(404).json({ message: 'Review tidak ditemukan' });
     }
 
-    // Pastikan hanya pengguna yang membuat review yang bisa mengeditnya
     if (review.userId !== userId) {
       return res.status(403).json({ message: 'Tidak diizinkan mengedit review ini' });
     }
