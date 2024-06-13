@@ -9,8 +9,8 @@ const CartItems = () => {
     
     const cartItemsList = all_product.filter(cartItem => cartItems[cartItem.id] > 0)
     .map(cartItem => {
-      const { _id, __v, date, ...item } = cartItem; // Destructure _id and __v, and rest of the properties
-      return { ...item, quantity: cartItems[cartItem.id] }; // Spread rest of the properties and add quantity
+      const { _id, __v, date, ...item } = cartItem; 
+      return { ...item, quantity: cartItems[cartItem.id] };
     });;
     console.log(cartItemsList);
   return (

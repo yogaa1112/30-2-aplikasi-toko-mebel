@@ -28,7 +28,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route path="/Login" element={<LoginSignup />} />
-          <Route path="*" element={<NotFound/>} />
+          <Route path="*"  exact={true} element={<NotFound/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>
