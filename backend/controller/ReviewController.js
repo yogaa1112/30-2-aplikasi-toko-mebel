@@ -48,7 +48,7 @@ const removeReview = async (req, res) => {
   const { userId } = req.body;
 
   try {
-    const review = await Review.findById(reviewId);
+    const review = await Review.findOne({ _id: reviewId });
     if (!review) {
       return res.status(404).json({ message: 'Review tidak ditemukan' });
     }
@@ -58,13 +58,14 @@ const removeReview = async (req, res) => {
       return res.status(403).json({ message: 'Tidak diizinkan menghapus review ini' });
     }
 
-    await review.remove();
+    await Review.deleteOne({ _id: reviewId });
     res.json({ message: 'Review berhasil dihapus' });
   } catch (error) {
     console.error('Kesalahan saat menghapus review:', error);
     res.status(500).json({ message: 'Kesalahan Internal Server' });
   }
 };
+
 
 // Fungsi untuk mengedit review
 const editReview = async (req, res) => {

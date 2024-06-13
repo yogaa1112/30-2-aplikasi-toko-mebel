@@ -1,6 +1,6 @@
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Shop from "./Pages/Shop";
 import ShopCategory from "./Pages/ShopCategory";
 import Product from "./Pages/Product";
@@ -12,8 +12,14 @@ import office_banner from "./Components/Assets/office.png"
 import kitchen_banner from "./Components/Assets/kitchen.png"
 import CheckoutSuccess from "./Components/CheckoutSuccess/CheckoutSuccess";
 import NotFound from "./Pages/NotFound";
+import Review from "./Components/Review/Review";
+import ReviewForm from "./Components/ReviewForm/ReviewForm";
+
 
 function App() {
+  const isAuthenticated = localStorage.getItem('auth-token');
+  const userId = localStorage.getItem('userId');
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -28,6 +34,9 @@ function App() {
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route path="/Login" element={<LoginSignup />} />
           <Route path="*" element={<NotFound/>} />
+          <Route path="/reviews" element={isAuthenticated ? <Review userId={userId} /> : <Navigate to="/login" />} />
+          <Route path="/review-form/:productId" element={isAuthenticated ? <ReviewForm /> : <Navigate to="/login" />} />
+          <Route path="/review-form/:productId/:reviewId" element={isAuthenticated ? <ReviewForm /> : <Navigate to="/login" />} />
         </Routes>
         <Footer />
       </BrowserRouter>

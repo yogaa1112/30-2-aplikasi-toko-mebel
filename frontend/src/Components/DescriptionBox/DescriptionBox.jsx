@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './DescriptionBox.css';
-import ReviewForm from '../ReviewForm/ReviewForm';
+// import ReviewForm from '../ReviewForm/ReviewForm';
 import StarRating from '../StarRating/StarRating';
 import axios from 'axios';
 
@@ -34,10 +34,6 @@ const DescriptionBox = () => {
     fetchReviews();
   }, [productId]);
 
-  const addReview = (newReview) => {
-    console.log("Menambah review:", newReview);
-  };
-
   return (
     <div className='descriptionbox'>
       <div className="descriptionbox-navigator">
@@ -52,7 +48,6 @@ const DescriptionBox = () => {
           </div>
         ))}
       </div>
-      <ReviewForm onSubmit={addReview} />
     </div>
   );
 };
