@@ -13,7 +13,6 @@ import kitchen_banner from "./Components/Assets/kitchen.png"
 import CheckoutSuccess from "./Components/CheckoutSuccess/CheckoutSuccess";
 import NotFound from "./Pages/NotFound";
 
-
 function App() {
   return (
     <div className="App">
@@ -27,10 +26,10 @@ function App() {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
-          <Route path="/Login" element={<LoginSignup />} />
-          <Route path="*" element={<NotFound/>} />
+          <Route path="/login" element={<LoginSignup />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </div>
   );

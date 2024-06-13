@@ -29,7 +29,7 @@ app.get('/', (req,res)=>{
 app.use('/images', express.static('upload/images'))
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
-app.use('/reviews', reviewController.getAllReviews);
+app.use('/reviews', reviewRouter);
 app.use('/', productRouter);
 app.use('/adminLogin', adminLoginRouter);
 app.use('/adminSignup', adminSignupRouter);

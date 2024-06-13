@@ -2,17 +2,16 @@ const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
   userId: {
-    type: String, // Menggunakan email pengguna
-    required: true
+    type: String,
+    required: true,
   },
   productId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product',
+    type: Number, // Perbarui tipe data menjadi Number
     required: true,
   },
   paymentIntentId: {
-    type: String, // ID dari transaksi pembelian
-    required: true
+    type: String,
+    required: true,
   },
   rating: {
     type: Number,
@@ -24,4 +23,6 @@ const reviewSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Review', reviewSchema);
+const Review = mongoose.model('Review', reviewSchema);
+
+module.exports = Review;

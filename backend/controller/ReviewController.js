@@ -1,54 +1,48 @@
+const mongoose = require('mongoose');
 const Review = require('../model/Review');
 const Product = require('../model/Product');
 const Order = require('../model/order');
 
+// Fungsi untuk menambah review
 const addReview = async (req, res) => {
-  const { userId, productId, paymentIntentId, rating, comment } = req.body;
-
   try {
-    // Cek apakah produk dan pesanan tersedia
-    const product = await Product.findById(productId);
-    const order = await Order.findById(paymentIntentId);
-    if (!product || !order) {
-      return res.status(404).json({ message: 'Produk atau pesanan tidak ditemukan' });
-    }
+    const { userId, productId, paymentIntentId, rating, comment } = req.body;
 
-    // Membuat instance review baru
+    // Membuat instance review baru berdasarkan data yang diterima
     const newReview = new Review({
-      userId, // Menggunakan email pengguna
+      userId,
       productId,
       paymentIntentId,
       rating,
-      comment
+      comment,
     });
 
     // Menyimpan review ke dalam database
     const savedReview = await newReview.save();
 
-    res.status(201).json(savedReview); // Mengirimkan respons dengan review yang disimpan
-  } catch (error) {
-    console.error('Kesalahan saat menambah review:', error);
-    res.status(500).json({ message: 'Kesalahan Internal Server' });
+    res.status(201).json({ message: 'Review berhasil ditambahkan', review: savedReview });
+  } catch (err) {
+    console.error('Kesalahan saat menambah review:', err);
+    res.status(500).json({ error: 'Terjadi kesalahan saat menambah review' });
   }
 };
 
-// Mendapatkan review berdasarkan productId
+
+// Fungsi untuk mengambil semua review
 const getAllReviews = async (req, res) => {
-  try {
-    // Query all reviews from the database
-    const reviews = await Review.find();
+  const productId = req.params.productId;
 
-    // Send the reviews as JSON response
+  try {
+    const reviews = await Review.find({ productId: productId }); // Menggunakan Number, bukan ObjectId
+
     res.status(200).json(reviews);
-  } catch (error) {
-    // If there's an error, send an error response
-    console.error('Error fetching reviews:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+  } catch (err) {
+    console.error('Error fetching reviews:', err);
+    res.status(500).json({ error: 'Error fetching reviews' });
   }
 };
 
-
-// Menghapus review berdasarkan reviewId
+// Fungsi untuk menghapus review
 const removeReview = async (req, res) => {
   const { reviewId } = req.params;
   const { userId } = req.body;
@@ -72,7 +66,7 @@ const removeReview = async (req, res) => {
   }
 };
 
-// Mengedit review berdasarkan reviewId
+// Fungsi untuk mengedit review
 const editReview = async (req, res) => {
   const { reviewId } = req.params;
   const { userId, rating, comment } = req.body;
