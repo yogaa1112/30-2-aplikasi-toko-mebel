@@ -16,7 +16,7 @@ const addToCart = async (req, res) => {
         userData.cartData[req.body.itemId] = (userData.cartData[req.body.itemId] || 0) + 1;
 
         await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
-        res.send('Added');
+        res.send({success:true , message: "Added"});
     } catch (error) {
         res.status(500).send({ errors: "An error occurred while adding to cart" });
     }
@@ -41,7 +41,7 @@ const removeFromCart = async (req, res) => {
             }
 
             await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
-            res.send('Deleted');
+            res.send({success:true , message: "Deleted"});
         } else {
             res.status(400).send({ errors: "Item not found in cart or already at zero quantity" });
         }
@@ -49,7 +49,11 @@ const removeFromCart = async (req, res) => {
         res.status(500).send({ errors: "An error occurred while removing from cart" });
     }
 };
-
+const getCart = async (req,res)=>{
+    console.log("GetCart");
+    let userData = await Users.findOne({_id:req.user.id});
+    res.json(userData.cartData);
+}
 // Controller untuk menambahkan product
 const addProduct = async (req, res) => {
     let userData = await Users.findOne({ _id: req.user.id });
@@ -152,7 +156,7 @@ const UploadIMG = async(req,res)=>{
     }else{
         res.json({
             success : 1,
-            image_url : `http://host:${port}/images/${req.file.filename}`
+            image_url : `${process.env.SERVER_URL}${port}/images/${req.file.filename}`
         })
     }
 }
@@ -175,6 +179,7 @@ const getProductById = async (req, res) => {
 module.exports = {
     addToCart,
     removeFromCart,
+    getCart,
     addProduct,
     removeProduct,
     getAllProducts,
