@@ -8,7 +8,6 @@ const addReview = async (req, res) => {
   try {
     const { userId, productId, paymentIntentId, rating, comment } = req.body;
 
-    // Membuat instance review baru berdasarkan data yang diterima
     const newReview = new Review({
       userId,
       productId,
@@ -17,16 +16,13 @@ const addReview = async (req, res) => {
       comment,
     });
 
-    // Menyimpan review ke dalam database
     const savedReview = await newReview.save();
-
     res.status(201).json({ message: 'Review berhasil ditambahkan', review: savedReview });
   } catch (err) {
-    console.error('Kesalahan saat menambah review:', err);
+    console.error('Kesalahan saat menambah review:', err); // Cetak error di konsol
     res.status(500).json({ error: 'Terjadi kesalahan saat menambah review' });
   }
 };
-
 
 // Fungsi untuk mengambil semua review
 const getAllReviews = async (req, res) => {

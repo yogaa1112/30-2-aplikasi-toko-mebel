@@ -79,6 +79,12 @@
     padding-top: 3px;
 }
 
+#review-icon {
+    width: auto;
+    height: 24px;
+    padding-top: 3px;
+} 
+
 #login-icon {
     width: auto;
     height: 24px;

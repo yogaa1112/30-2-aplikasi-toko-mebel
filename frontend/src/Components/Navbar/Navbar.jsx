@@ -4,6 +4,7 @@ import './Navbar.css'
 import logo from '../Assets/logo-text.png'
 import cart_icon from '../Assets/cart_icon.png'
 import search_icon from '../Assets/search_icon.png'
+import review_icon from '../Assets/review-icon.png'
 import people_icon from '../Assets/people_icon.png'
 import logout_icon from '../Assets/logout.png'
 import { Link, useNavigate } from "react-router-dom";
@@ -81,6 +82,12 @@ const Navbar = () => {
                          />
                     <Link to=''><img onClick={searchHandler} src={search_icon} alt="search" id="search_icon" /></Link>
                 </div>
+                {localStorage.getItem('auth-token') && ( // Menampilkan hanya jika ada token
+                    <li onClick={() => { setMenu("reviews") }}>
+                        <Link style={{ textDecoration: 'none', color: 'black' }} to='/reviews'><img src={review_icon} alt="" id="review-icon"/></Link>
+                        {menu === "reviews" ? <hr /> : null}
+                    </li>
+                )}
                 {localStorage.getItem('auth-token')
                     ? <Link onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }}>
                         <img src={logout_icon} alt="logout" id="logout-icon" />
