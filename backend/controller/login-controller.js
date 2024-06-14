@@ -16,7 +16,7 @@ const login = async(req, res)=>{
                 }
             }
             if(isAdmin){
-               url = 'http://localhost:5173/'
+               url = `${process.env.CLIENT_URL}/admin`
                const token = jwt.sign(data, process.env.SECREET_USER);
                return res.json({succes:true, token, url:url})
             }
