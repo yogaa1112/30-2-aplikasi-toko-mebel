@@ -33,8 +33,8 @@ export const ProductDisplay = (props) => {
                     <p>(122)</p>
                 </div>
                 <div className="productdisplay-right-prices">
-                    <div className="productdisplay-right-prices-old">${product.price}</div>
-                    <div className="productdisplay-right-prices-new">${product.price}</div>
+                    <div className="productdisplay-right-prices-old">Rp.{product.price}</div>
+                    <div className="productdisplay-right-prices-new">Rp.{product.price}</div>
                 </div>
                 <div className="productdisplay-right-description">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit.

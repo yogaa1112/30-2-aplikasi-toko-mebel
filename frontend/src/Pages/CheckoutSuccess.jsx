@@ -1,6 +1,6 @@
 import React from 'react'
-import './CheckoutSuccess.css'
-import success_icon from '../Assets/success_icon.png'
+import './CSS/CheckoutSuccess.css'
+import success_icon from '../Components/Assets/success_icon.png'
 const CheckoutSuccess = () => {
     return ( 
     <div className='checkout-true'>

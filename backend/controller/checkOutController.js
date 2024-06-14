@@ -6,7 +6,7 @@ const checkout =  async (req, res) => {
     const customer = await stripe.customers.create({
       metadata:{
         userId : req.body.userEmail,
-        cart : JSON.stringify(req.body.cartItems)
+        cart :JSON.stringify(req.body.cartItems)
       }
     })
     const line_items = req.body.cartItems.map(item =>{
