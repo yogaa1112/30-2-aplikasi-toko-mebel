@@ -49,11 +49,13 @@ const removeFromCart = async (req, res) => {
         res.status(500).send({ errors: "An error occurred while removing from cart" });
     }
 };
+
 const getCart = async (req,res)=>{
     console.log("GetCart");
     let userData = await Users.findOne({_id:req.user.id});
     res.json(userData.cartData);
 }
+
 // Controller untuk menambahkan product
 const addProduct = async (req, res) => {
     let userData = await Users.findOne({ _id: req.user.id });
