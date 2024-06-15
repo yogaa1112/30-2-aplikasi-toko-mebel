@@ -12,6 +12,20 @@ const Loginsignup = () => {
     password:"",
     email:""
   })
+  const [isTosChecked, setIsTosChecked] = useState(false);
+
+  const handleTosChange = (e) => {
+    setIsTosChecked(e.target.checked);
+  };
+
+  const handleContinueClick = () => {
+    if (!isTosChecked) {
+      alert('Please agree to the terms of use and privacy.');
+    } else {
+      state === "Login" ? login() : signup();
+    }
+      
+  };
 
   const changeHandler = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -29,6 +43,7 @@ const Loginsignup = () => {
       },
       body: JSON.stringify(formData),
     }).then((response)=> response.json()).then((data)=>responseData=data)
+    console.log("Login: ",responseData);
     if(responseData.succes){
       let UserData = formData.email
       localStorage.setItem('user-id', UserData)
@@ -59,6 +74,7 @@ const Loginsignup = () => {
       },
       body: JSON.stringify(formData),
     }).then((response)=> response.json()).then((data)=>responseData=data)
+    console.log("Signup: ",responseData);
     if(responseData.succes){
       localStorage.setItem('auth-token',responseData.token);
       window.location.replace("/");
@@ -77,10 +93,11 @@ const Loginsignup = () => {
           <input name='email' value={formData.email} onChange={changeHandler} type='email' placeholder='Email Address' />
           <input name='password' value={formData.password} onChange={changeHandler} type='password' placeholder='Password' />
         </div>
-        <button onClick={()=>{state==="Login"?login():signup()}}>Continue</button>
+        <button onClick={handleContinueClick} >Continue</button>
         {state==="Sign up"?<p className='loginsignup-login'>Already have an account? <span onClick={()=>{setState("Login")}}>Login Here</span></p> : <p className='loginsignup-login'>Create an account? <span onClick={()=>{setState("Sign up")}}>Click Here</span></p>}
         <div className='loginsignup-agree'>
-          <input type='checkbox' id='terms' />
+          <input type='checkbox' id='terms' required
+          onChange={handleTosChange} />
           <label htmlFor='terms'>By Continue, I agree to the terms of use & privacy.</label>
         </div>
       </div>
