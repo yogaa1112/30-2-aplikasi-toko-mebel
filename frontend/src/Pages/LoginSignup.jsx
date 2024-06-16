@@ -43,7 +43,6 @@ const Loginsignup = () => {
       },
       body: JSON.stringify(formData),
     }).then((response)=> response.json()).then((data)=>responseData=data)
-    console.log("Login: ",responseData);
     if(responseData.succes){
       let UserData = formData.email
       localStorage.setItem('user-id', UserData)
@@ -74,7 +73,6 @@ const Loginsignup = () => {
       },
       body: JSON.stringify(formData),
     }).then((response)=> response.json()).then((data)=>responseData=data)
-    console.log("Signup: ",responseData);
     if(responseData.succes){
       localStorage.setItem('auth-token',responseData.token);
       window.location.replace("/");

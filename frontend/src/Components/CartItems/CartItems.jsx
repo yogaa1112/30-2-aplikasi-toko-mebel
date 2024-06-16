@@ -9,7 +9,7 @@ const CartItems = () => {
     
     const cartItemsList = all_product.filter(cartItem => cartItems[cartItem.id] > 0)
     .map(cartItem => {
-      const { _id, __v, date, image, category, sub_category, available, ...item } = cartItem; 
+      const { _id, __v, date, available, ...item } = cartItem; 
       return { ...item, quantity: cartItems[cartItem.id] };
     });;
     console.log(cartItemsList);
@@ -30,9 +30,9 @@ const CartItems = () => {
             <div className="cartitems-format cartitems-format-main">
                 <img src={cartItem.image} alt="" className='carticon-product-icon' />
                 <p>{cartItem.name}</p>
-                <p>Rp.{cartItem.price}</p>
+                <p>Rp. {cartItem.price}</p>
                 <button className='cartitems-quantity'>{cartItems[cartItem.id]}</button>
-                <p>Rp.{cartItem.price*cartItems[cartItem.id]}</p>
+                <p>Rp. {cartItem.price*cartItems[cartItem.id]}</p>
                 <img className='cartitems-remove-icon' src={remove_icon} onClick={()=>{removeFromCart(cartItem.id)}} alt="" />
             </div>
             <hr />
