@@ -12,13 +12,11 @@ import office_banner from "./Components/Assets/office.png"
 import kitchen_banner from "./Components/Assets/kitchen.png"
 import CheckoutSuccess from "./Components/CheckoutSuccess/CheckoutSuccess";
 import NotFound from "./Pages/NotFound";
-import Review from "./Components/ReviewList/ReviewList";
+import ReviewList from "./Components/ReviewList/ReviewList"; // Pastikan import ReviewList benar
 import ReviewForm from "./Components/ReviewForm/ReviewForm";
-
 
 function App() {
   const isAuthenticated = localStorage.getItem('auth-token');
-  // const userId = localStorage.getItem('userId');
 
   return (
     <div className="App">
@@ -31,12 +29,14 @@ function App() {
           <Route path="/kitchen" element={<ShopCategory banner={kitchen_banner} category="kitchen" />} />
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginSignup />} />
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route path="/Login" element={<LoginSignup />} />
-          <Route path="*" element={<NotFound/>} />
-          <Route path="/reviews" element={<Review/>} />
+          <Route path="/reviews" element={<ReviewList />} />
           <Route path="/reviews/:productId" element={<ReviewForm />} />
+          <Route path="/reviews/edit/:reviewId" element={<ReviewForm />} />
           <Route path="/reviews/:productId/:reviewId" element={isAuthenticated ? <ReviewForm /> : <Navigate to="/login" />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>

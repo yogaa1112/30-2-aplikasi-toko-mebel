@@ -8,6 +8,27 @@ const addReview = async (req, res) => {
   try {
     const { userId, productId, paymentIntentId, rating, comment } = req.body;
 
+    // Validate that required fields are present
+    if (!userId || !productId || !rating || !comment || !paymentIntentId) {
+      console.log('Data tidak lengkap:');
+      if (!userId) {
+        console.log('userId tidak ada');
+      }
+      if (!productId) {
+        console.log('productId tidak ada');
+      }
+      if (!rating) {
+        console.log('rating tidak ada');
+      }
+      if (!comment) {
+        console.log('comment tidak ada');
+      }
+      if (!paymentIntentId) {
+        console.log('paymentIntentId tidak ada');
+      }
+      return res.status(400).json({ error: 'Data tidak lengkap untuk menambah review' });
+    }
+
     const newReview = new Review({
       userId,
       productId,
@@ -19,10 +40,11 @@ const addReview = async (req, res) => {
     const savedReview = await newReview.save();
     res.status(201).json({ message: 'Review berhasil ditambahkan', review: savedReview });
   } catch (err) {
-    console.error('Kesalahan saat menambah review:', err); // Cetak error di konsol
+    console.error('Kesalahan saat menambah review:', err);
     res.status(500).json({ error: 'Terjadi kesalahan saat menambah review' });
   }
 };
+
 
 // Fungsi untuk mengambil semua review
 const getAllReviews = async (req, res) => {

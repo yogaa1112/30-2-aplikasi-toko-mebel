@@ -1,45 +1,57 @@
-.review-form-container {
-  max-width: 400px;
-  margin: auto;
+/* ReviewForm.css */
+
+form {
+  max-width: 600px;
+  margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   background-color: #f9f9f9;
-}
-
-.review-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
+  display: block;
+  margin-bottom: 10px;
   font-weight: bold;
+  color: #333;
 }
 
 input[type="number"],
 textarea {
   width: 100%;
-  padding: 8px;
-  font-size: 16px;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
-  border-radius: 3px;
-  resize: vertical;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
-button[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
+button {
+  display: inline-block;
   padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #45a049;
+button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+  form {
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 14px;
+  }
 }

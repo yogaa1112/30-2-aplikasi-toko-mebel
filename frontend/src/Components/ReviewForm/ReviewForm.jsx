@@ -1,72 +1,105 @@
-// Misalkan ini adalah komponen yang memerlukan userId, seperti ReviewForm.jsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import './ReviewForm.css';
 
-const ReviewForm = ({ productId, onSubmit }) => {
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+const ReviewForm = ({ review, onSave }) => {
+  const navigate = useNavigate();
+  const { productId } = useParams(); // Mengambil productId dari URL
+  const [rating, setRating] = useState(review ? review.rating : 1);
+  const [comment, setComment] = useState(review ? review.comment : '');
+  const [paymentIntentId, setPaymentIntentId] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (!review) {
+      fetchPaymentIntentId();
+    } else {
+      setPaymentIntentId(review.paymentIntentId);
+    }
+  }, [review, productId]); // Pastikan productId terpasang di dependencies
 
+  const fetchPaymentIntentId = async () => {
     try {
-      // Retrieve token from localStorage
       const token = localStorage.getItem('auth-token');
-
-      // Call onSubmit prop with review data
-      const response = await fetch('http://localhost:4000/reviews/add', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:4000/api/orders/${productId}`, { // Perhatikan url /api/orders
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-          'auth-token': token, // Include token in headers
+          'auth-token': token,
         },
-        body: JSON.stringify({
-          productId,
-          rating,
-          comment,
-        }),
       });
 
-      const data = await response.json();
-      console.log('Review submitted:', data);
+      if (!response.ok) {
+        throw new Error('Error fetching paymentIntentId');
+      }
 
-      // Optional: Reset form state after successful submission
-      setRating(0);
-      setComment('');
+      const orderData = await response.json();
+      setPaymentIntentId(orderData.paymentIntentId);
     } catch (error) {
-      console.error('Error submitting review:', error);
+      console.error('Error fetching paymentIntentId:', error);
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  const token = localStorage.getItem('auth-token');
+  const userId = localStorage.getItem('user-id');
+
+  const reviewData = {
+    userId,
+    productId,
+    paymentIntentId,
+    rating,
+    comment,
+  };
+
+  const url = review ? `http://localhost:4000/reviews/${review._id}` : 'http://localhost:4000/reviews/add';
+  const method = review ? 'PUT' : 'POST';
+
+  try {
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': token,
+      },
+      body: JSON.stringify(reviewData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Error saving review: ${errorData.error || response.statusText}`);
+    }
+
+    const savedReview = await response.json();
+    onSave(savedReview); // Pastikan onSave adalah sebuah fungsi
+    navigate(`/product/${productId}`);
+  } catch (error) {
+    console.error('Error saving review:', error.message);
+  }
+  };
+
   return (
-    <div className="review-form-container">
-      <h2>Add Review</h2>
-      <form className="review-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="rating">Rating:</label>
-          <input
-            type="number"
-            id="rating"
-            min="1"
-            max="5"
-            value={rating}
-            onChange={(e) => setRating(parseInt(e.target.value))}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="comment">Comment:</label>
-          <textarea
-            id="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Submit Review</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Rating:
+        <input
+          type="number"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+          required
+          min="1"
+          max="5"
+        />
+      </label>
+      <label>
+        Comment:
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          required
+        />
+      </label>
+      <button type="submit">Save</button>
+    </form>
   );
 };
 
