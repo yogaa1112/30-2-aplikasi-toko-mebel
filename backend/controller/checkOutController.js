@@ -3,13 +3,10 @@ const stripe = Stripe(process.env.STRIPE_KEY)
 const Order = require('../model/order.js')
 
 const checkout =  async (req, res) => {
-  const products = req.body.cartItems
-  const Info =products.map(({ image, category, sub_category, ...rest }) => rest);
-
     const customer = await stripe.customers.create({
       metadata:{
         userId : req.body.userEmail,
-        cart :JSON.stringify(Info)
+        cart :JSON.stringify(req.body.cartItems)
       }
     })
     const line_items = req.body.cartItems.map(item =>{

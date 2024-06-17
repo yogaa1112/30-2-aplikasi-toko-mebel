@@ -56,22 +56,6 @@ const getCart = async (req,res)=>{
     res.json(userData.cartData);
 }
 
-const clearCart = async (req, res)=>{
-    console.log("ClearCart");
-    try {
-        let userData = await Users.findOne({_id:req.user.id})
-        if (userData && userData.cartData) {
-            userData.cartData = {};  
-            await userData.save();
-            res.send({ success: true, message: "Cart cleared" });
-        } else {
-            res.status(400).send({ errors: "No cart data to clear" });
-        }
-    } catch (err) {
-        res.status(500).send('Server error!')
-        console.log(err.message);
-    }
-}
 // Controller untuk menambahkan product
 const addProduct = async (req, res) => {
     let userData = await Users.findOne({ _id: req.user.id });
@@ -198,7 +182,6 @@ module.exports = {
     addToCart,
     removeFromCart,
     getCart,
-    clearCart,
     addProduct,
     removeProduct,
     getAllProducts,
