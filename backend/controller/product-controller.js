@@ -55,6 +55,9 @@ const getCart = async (req,res)=>{
     let userData = await Users.findOne({_id:req.user.id});
     res.json(userData.cartData);
 }
+const clearCart = async(req,res)=>{
+    
+}
 
 // Controller untuk menambahkan product
 const addProduct = async (req, res) => {

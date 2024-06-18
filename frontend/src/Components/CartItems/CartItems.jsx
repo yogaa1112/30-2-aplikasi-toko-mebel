@@ -9,7 +9,7 @@ const CartItems = () => {
     
     const cartItemsList = all_product.filter(cartItem => cartItems[cartItem.id] > 0)
     .map(cartItem => {
-      const { _id, __v, date, image, category, sub_category, available, ...item } = cartItem; 
+      const { _id, __v, date, ...item } = cartItem; 
       return { ...item, quantity: cartItems[cartItem.id] };
     });;
     console.log(cartItemsList);
