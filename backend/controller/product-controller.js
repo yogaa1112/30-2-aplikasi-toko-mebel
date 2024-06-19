@@ -158,7 +158,7 @@ const UploadIMG = async(req,res)=>{
     }else{
         res.json({
             success : 1,
-            image_url : `${process.env.SERVER_URL}${port}/images/${req.file.filename}`
+            image_url : `${process.env.SERVER_URL}/images/${req.file.filename}`
         })
     }
 }
