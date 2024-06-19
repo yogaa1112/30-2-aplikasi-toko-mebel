@@ -10,7 +10,7 @@ import LoginSignup from "./Pages/LoginSignup";
 import home_banner from "./Components/Assets/home.png";
 import office_banner from "./Components/Assets/office.png"
 import kitchen_banner from "./Components/Assets/kitchen.png"
-import CheckoutSuccess from "./Components/CheckoutSuccess/CheckoutSuccess";
+import CheckoutSuccess from "./Pages/CheckoutSuccess";
 import NotFound from "./Pages/NotFound";
 import ReviewList from "./Components/ReviewList/ReviewList"; // Pastikan import ReviewList benar
 import ReviewForm from "./Components/ReviewForm/ReviewForm";

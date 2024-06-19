@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import axios from 'axios'
+import { ShopContext } from '../../Context/ShopContext'
 
 const CheckOutButton = ({cartItems}) => {
+    const {clearCart} = useContext(ShopContext)
     const userEmail = localStorage.getItem('user-id')
     const handleCheckout = ()=>{
         if(!localStorage.getItem('auth-token')){
@@ -14,10 +16,12 @@ const CheckOutButton = ({cartItems}) => {
         }).then((res)=>{
             if(res.data.url){
                 window.location.href = res.data.url
+                clearCart()
             }
         }).catch((err)=>{
             console.log(err.message);
         })
+       
     }
   return (
     <div>

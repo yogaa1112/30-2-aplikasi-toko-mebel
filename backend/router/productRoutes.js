@@ -4,7 +4,8 @@ const router = express.Router();
 const {
     addToCart, 
     removeFromCart,
-    getCart, 
+    getCart,
+    clearCart, 
     addProduct, 
     removeProduct, 
     getAllProducts, 
@@ -22,6 +23,7 @@ router.post('/addtocart', fetchUser, addToCart);
 router.post('/removefromcart', fetchUser, removeFromCart);
 router.post('/getcart', fetchUser, getCart )
 router.post('/checkout', checkout)
+router.post('/clearcart',fetchUser, clearCart)
 
 // Product routes
 router.post('/upload', upload.single('produk'), fetchUser, UploadIMG)
