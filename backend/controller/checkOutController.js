@@ -12,6 +12,9 @@ const checkout =  async (req, res) => {
       } 
     })
     const line_items = req.body.cartItems.map(item =>{
+      const exchangeRate = 0.000061;
+      const priceInUSD = Math.round((item.price * exchangeRate) * 100 );
+      console.log(`Price in USD for ${item.name}: ${priceInUSD}`);
       return{
         price_data: {
           currency: 'usd',
@@ -23,7 +26,7 @@ const checkout =  async (req, res) => {
               id: item.id
             }
           },
-          unit_amount: item.price,
+          unit_amount: priceInUSD,
         },
         quantity: item.quantity,
       }
