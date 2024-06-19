@@ -64,7 +64,7 @@ const Loginsignup = () => {
   }
 
   const signup = async () =>{
-    console.log("Signup Sucses",formData);
+    // console.log("Signup Sucses",formData);
     let responseData;
     await fetch('http://localhost:4000/signup',{
       method:'POST',
@@ -74,8 +74,8 @@ const Loginsignup = () => {
       },
       body: JSON.stringify(formData),
     }).then((response)=> response.json()).then((data)=>responseData=data)
-    console.log("Signup: ",responseData);
-    if(responseData.succes){
+    // console.log("Signup: ",responseData);
+    if(responseData.success){
       localStorage.setItem('auth-token',responseData.token);
       window.location.replace("/");
     }
