@@ -89,7 +89,7 @@ const Navbar = () => {
                     </li>
                 )}
                 {localStorage.getItem('auth-token')
-                    ? <Link onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/") }}>
+                    ? <Link onClick={() => { localStorage.removeItem('auth-token'); window.location.replace("/"); localStorage.removeItem('isAdmin') }}>
                         <img src={logout_icon} alt="logout" id="logout-icon" />
                       </Link>
                     : <Link to='/login'><img src={people_icon} alt="login" id="login-icon" /></Link>

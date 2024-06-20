@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      {token && isAdmin ? <NavAdmin/>: <Navbar /> }
+      {token && isAdmin === 'true' ? <NavAdmin/>: <Navbar /> }
         
         <Routes>
           <Route path="/" element={<Shop />} />

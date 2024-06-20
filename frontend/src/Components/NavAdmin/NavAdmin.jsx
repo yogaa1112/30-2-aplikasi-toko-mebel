@@ -6,6 +6,7 @@ import navProfile from '../Assets/navbar-profile.png'
 const NavAdmin = () => {
   const handleLogoClick = () => {
     localStorage.removeItem('auth-token')
+    localStorage.removeItem('isAdmin')
     window.location.href = 'http://localhost:3000';
     
   };
