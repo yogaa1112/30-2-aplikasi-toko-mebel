@@ -8,7 +8,6 @@ const login = async(req, res)=>{
         //membandingkan password yang dimasukan oleh user dengan password yang ada di database
         const passCompare = req.body.password === user.password;
         const isAdmin =  user.isAdmin;
-        let url = false
         if(passCompare){
             const data = {
                 user : {
@@ -16,12 +15,12 @@ const login = async(req, res)=>{
                 }
             }
             if(isAdmin){
-               url = `${process.env.CLIENT_URL}/admin`
+                
                const token = jwt.sign(data, process.env.SECREET_USER);
-               return res.json({succes:true, token, url:url})
+               return res.json({succes:true, token, isAdmin:true})
             }
             const token = jwt.sign(data, process.env.SECREET_USER);
-            res.json({succes:true, token, url:url})
+            res.json({succes:true, token, isAdmin:false})
           
         }
         else{

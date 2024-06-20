@@ -48,8 +48,9 @@ const Loginsignup = () => {
       let UserData = formData.email
       localStorage.setItem('user-id', UserData)
       localStorage.setItem('auth-token',responseData.token);
-      if(responseData.url){
-        window.location.href = responseData.url
+      localStorage.setItem('isAdmin', responseData.isAdmin);
+      if(responseData.isAdmin){
+        window.location.href = '/admin';
         return 0
       }
       else{

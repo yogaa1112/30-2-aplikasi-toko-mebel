@@ -14,16 +14,22 @@ import CheckoutSuccess from "./Pages/CheckoutSuccess";
 import NotFound from "./Pages/NotFound";
 import ReviewList from "./Components/ReviewList/ReviewList"; // Pastikan import ReviewList benar
 import ReviewForm from "./Components/ReviewForm/ReviewForm";
+import Admin from "./Pages/Admin";
+import NavAdmin from "./Components/NavAdmin/NavAdmin";
 
 function App() {
   const isAuthenticated = localStorage.getItem('auth-token');
+  const token = localStorage.getItem('auth-token')
+  const isAdmin = localStorage.getItem('isAdmin')
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+      {token && isAdmin ? <NavAdmin/>: <Navbar /> }
+        
         <Routes>
           <Route path="/" element={<Shop />} />
+          <Route path="admin" element={<Admin/>}/>
           <Route path="/home" element={<ShopCategory banner={home_banner} category="living" />} />
           <Route path="/office" element={<ShopCategory banner={office_banner} category="office" />} />
           <Route path="/kitchen" element={<ShopCategory banner={kitchen_banner} category="kitchen" />} />
