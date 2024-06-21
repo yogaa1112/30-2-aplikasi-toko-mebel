@@ -3,7 +3,9 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    height: 90vh;
+    height: fit-content;
+    width: 100%;
+    overflow: hidden;
 }
 
 .relatedproducts h1{
@@ -23,4 +25,8 @@
     margin-top: 50px;
     display: flex;
     gap: 30px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%; /* Ensure the width is contained within the parent */
+    padding: 10px; /* Optional: Add some padding if needed */
+    box-sizing: border-box;
 }

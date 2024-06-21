@@ -7,4 +7,9 @@
     font-weight: 600;
     margin: 100px 170px;
     text-transform: capitalize;
+    height: 16px;
+}
+.breadcrum img{
+    width: 10px;
+    height: 16px;
 }
