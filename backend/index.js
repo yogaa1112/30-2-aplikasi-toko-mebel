@@ -20,12 +20,12 @@ const orderRouter = require('./router/OrderRoutes');
 app.use(logger('dev'));
 app.use('/', WebhookRouter);
 app.use(express.json());
-const corsOptions = {
-    origin: '*', 
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
-};
-
-app.use(cors(corsOptions));
+app.use(
+    cors({
+      credentials: true,
+      origin: "http://localhost:4000",
+    })
+  );
 
 
 app.get('/', (req,res)=>{
