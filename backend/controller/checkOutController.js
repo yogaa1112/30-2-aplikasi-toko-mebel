@@ -75,7 +75,7 @@ const createOrder = async(customer, data)=>{
 
 const Webhook =  (req, res) => {
     
-  const endpointSecret = process.env.EP_SECREET;
+  const endpointSecret = process.env.EP_SECRET;
   let event;
   let data;
   let eventType;

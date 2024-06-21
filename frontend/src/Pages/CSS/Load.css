@@ -1,0 +1,14 @@
+.Load{
+    width: 100%;
+    height: 100vh;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.Load h2{
+    font-size: xx-large;
+    text-align: center;
+    padding-bottom: 20px;
+}
