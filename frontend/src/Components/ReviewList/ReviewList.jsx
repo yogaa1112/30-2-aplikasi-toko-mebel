@@ -110,7 +110,7 @@ const ReviewList = () => {
         <div key={order._id} className="order-card">
           <h2>Order ID: {order._id}</h2>
           {order.products.map(product => {
-            const productReviews = reviewList.filter(review => review.productId == productId); // Gunakan == untuk perbandingan tipe yang berbeda
+            const productReviews = reviewList.filter(review => review.productId === productId); // Gunakan == untuk perbandingan tipe yang berbeda
             console.log(`Product ID ${productId} has reviews:`, productReviews); // Log product reviews
             return (
               <div key={product.id} className="product-card">

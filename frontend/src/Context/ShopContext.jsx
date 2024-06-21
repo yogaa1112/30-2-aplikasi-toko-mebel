@@ -24,6 +24,7 @@ const ShopContextProvider = (props) => {
           return response.json();
         })
         .then(data => {
+            
           if (!Array.isArray(data)) {
             throw new Error('Invalid data format: expected an array');
           }
@@ -78,7 +79,11 @@ const ShopContextProvider = (props) => {
         for(const item in cartItems){
             if(cartItems[item]>0){
                 let itemInfo = all_product.find((product)=>product.id === Number(item))
-                totalAmount += itemInfo.price * cartItems[item];
+                if (itemInfo) {     
+                    totalAmount += itemInfo.price * cartItems[item];
+                } else {
+                    console.error(`Item with id ${item} not found in all_product`);
+                }
             }
         }
         return totalAmount;
