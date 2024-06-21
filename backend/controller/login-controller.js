@@ -16,10 +16,10 @@ const login = async(req, res)=>{
             }
             if(isAdmin){
                 
-               const token = jwt.sign(data, process.env.SECREET_USER);
+               const token = jwt.sign(data, process.env.SECRET_USER);
                return res.json({succes:true, token, isAdmin:true})
             }
-            const token = jwt.sign(data, process.env.SECREET_USER);
+            const token = jwt.sign(data, process.env.SECRET_USER);
             res.json({succes:true, token, isAdmin:false})
           
         }
