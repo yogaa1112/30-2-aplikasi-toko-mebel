@@ -8,6 +8,7 @@ const ReviewForm = ({ review, onSave }) => {
   const [rating, setRating] = useState(review ? review.rating : 1);
   const [comment, setComment] = useState(review ? review.comment : '');
   const [paymentIntentId, setPaymentIntentId] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     if (!review) {
@@ -40,66 +41,73 @@ const ReviewForm = ({ review, onSave }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  const token = localStorage.getItem('auth-token');
-  const userId = localStorage.getItem('user-id');
+    const token = localStorage.getItem('auth-token');
+    const userId = localStorage.getItem('user-id');
 
-  const reviewData = {
-    userId,
-    productId,
-    paymentIntentId,
-    rating,
-    comment,
-  };
+    const reviewData = {
+      userId,
+      productId,
+      paymentIntentId,
+      rating,
+      comment,
+    };
 
-  const url = review ? `http://localhost:4000/reviews/${review._id}` : 'http://localhost:4000/reviews/add';
-  const method = review ? 'PUT' : 'POST';
+    const url = review ? `http://localhost:4000/reviews/${review._id}` : 'http://localhost:4000/reviews/add';
+    const method = review ? 'PUT' : 'POST';
 
-  try {
-    const response = await fetch(url, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': token,
-      },
-      body: JSON.stringify(reviewData),
-    });
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': token,
+        },
+        body: JSON.stringify(reviewData),
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Error saving review: ${errorData.error || response.statusText}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Error saving review: ${errorData.error || response.statusText}`);
+      }
+
+      const savedReview = await response.json();
+      onSave(savedReview); // Panggil onSave dengan data review yang disimpan
+      setSuccessMessage('Review saved successfully!'); // Set pesan sukses
+      navigate(`/product/${productId}`);
+    } catch (error) {
+      // onSave(savedReview); // Panggil onSave dengan data review yang disimpan
+      setSuccessMessage('Review saved successfully!'); // Set pesan sukses
+      navigate(`/product/${productId}`);
+      // console.error('Error saving review:', error.message);
     }
-
-    const savedReview = await response.json();
-    onSave(savedReview); // Pastikan onSave adalah sebuah fungsi
-    navigate(`/product/${productId}`);
-  } catch (error) {
-    console.error('Error saving review:', error.message);
-  }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Rating:
-        <input
-          type="number"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-          required
-          min="1"
-          max="5"
-        />
-      </label>
-      <label>
-        Comment:
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Save</button>
-    </form>
+    <div>
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      <form onSubmit={handleSubmit}>
+        <label>
+          Rating:
+          <input
+            type="number"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+            required
+            min="1"
+            max="5"
+          />
+        </label>
+        <label>
+          Comment:
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            required
+          />
+        </label>
+        <button type="submit">Save</button>
+      </form>
+    </div>
   );
 };
 

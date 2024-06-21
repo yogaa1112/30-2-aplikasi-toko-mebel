@@ -2,14 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ReviewList.css';
 
-const ReviewsList = () => {
+const ReviewList = () => {
   const { productId } = useParams();
   const [orderList, setOrderList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
+    console.log("Fetched productId from URL:", productId); // Log productId
     fetchOrders();
   }, []);
+
+  useEffect(() => {
+    if (orderList.length > 0 && productId) {
+      fetchReviews(productId);
+    }
+  }, [orderList, productId]);
 
   const fetchOrders = async () => {
     try {
@@ -26,6 +33,7 @@ const ReviewsList = () => {
       const orders = await response.json();
       const userId = localStorage.getItem('user-id');
       const userOrders = orders.filter(order => order.userId === userId);
+      console.log("User orders:", userOrders); // Log order data
       setOrderList(userOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -34,45 +42,36 @@ const ReviewsList = () => {
 
   const fetchReviews = async (productId) => {
     try {
-      const token = localStorage.getItem('auth-token');
-      const response = await fetch(`http://localhost:4000/reviews/${productId}`, {
-        method: 'GET',
-        headers: {
-          'auth-token': token,
-        },
-      });
+      const response = await fetch(`http://localhost:4000/reviews/${productId}`);
       if (!response.ok) {
         throw new Error('Error fetching reviews');
       }
       const reviews = await response.json();
+      console.log("Fetched reviews:", reviews); // Log review data
       setReviewList(reviews);
     } catch (error) {
       console.error('Error fetching reviews:', error);
     }
   };
 
-  const handleAddReview = async (productId) => {
-    // Implement logic to add review
-    // Call fetchReviews after adding the review to refresh the list
-  };
-
   const handleEditReview = async (reviewId, newRating, newComment) => {
-    // Implement logic to edit review for the specific product
-    // Redirect or update review list accordingly
     try {
       const token = localStorage.getItem('auth-token');
+      const userId = localStorage.getItem('user-id');
+
       const response = await fetch(`http://localhost:4000/reviews/${reviewId}`, {
         method: 'PUT',
         headers: {
           'auth-token': token,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ rating: newRating, comment: newComment }),
+        body: JSON.stringify({ userId, rating: newRating, comment: newComment }),
       });
+
       if (!response.ok) {
         throw new Error('Error editing review');
       }
-      // Update reviewList state dengan review yang telah diperbarui
+
       const updatedReview = await response.json();
       setReviewList(prevReviews =>
         prevReviews.map(review => (review._id === reviewId ? updatedReview : review))
@@ -82,21 +81,21 @@ const ReviewsList = () => {
     }
   };
 
-  const handleDeleteReview = async (productId, reviewId) => {
-    // Implement logic to delete review for the specific product
-    // Update review list accordingly
+  const handleDeleteReview = async (reviewId) => {
     try {
       const token = localStorage.getItem('auth-token');
+
       const response = await fetch(`http://localhost:4000/reviews/${reviewId}`, {
         method: 'DELETE',
         headers: {
           'auth-token': token,
         },
       });
+
       if (!response.ok) {
         throw new Error('Error deleting review');
       }
-      // Hapus review dari reviewList state
+
       setReviewList(prevReviews =>
         prevReviews.filter(review => review._id !== reviewId)
       );
@@ -111,13 +110,14 @@ const ReviewsList = () => {
         <div key={order._id} className="order-card">
           <h2>Order ID: {order._id}</h2>
           {order.products.map(product => {
-            const productReviews = reviewList.filter(review => review.productId === product.id);
+            const productReviews = reviewList.filter(review => review.productId == productId); // Gunakan == untuk perbandingan tipe yang berbeda
+            console.log(`Product ID ${productId} has reviews:`, productReviews); // Log product reviews
             return (
               <div key={product.id} className="product-card">
                 <img src={product.image} alt={product.name} className="product-image" />
                 <div className="product-info">
                   <h3>{product.name}</h3>
-                  <p>Price: ${product.price}</p>
+                  <p>Price: Rp {product.price}</p>
                   <div className="review-info">
                     {productReviews.length > 0 ? (
                       productReviews.map(review => (
@@ -125,8 +125,8 @@ const ReviewsList = () => {
                           <p>Rating: {review.rating}</p>
                           <p>Comment: {review.comment}</p>
                           <div className="review-actions">
-                            <button onClick={() => handleEditReview(review.productId)}>Edit Review</button>
-                            <button onClick={() => handleDeleteReview(review.productId)}>Delete Review</button>
+                            <button onClick={() => handleEditReview(review._id, review.rating, review.comment)}>Edit Review</button>
+                            <button onClick={() => handleDeleteReview(review._id)}>Delete Review</button>
                           </div>
                         </div>
                       ))
@@ -146,4 +146,4 @@ const ReviewsList = () => {
   );
 };
 
-export default ReviewsList;
+export default ReviewList;
