@@ -7,7 +7,7 @@ const NavAdmin = () => {
   const handleLogoClick = () => {
     localStorage.removeItem('auth-token')
     localStorage.removeItem('isAdmin')
-    window.location.href = 'https://fe-msib-6-toko-mebel-02.educalab.id/home';
+    window.location.replace("/");
     
   };
   return (
