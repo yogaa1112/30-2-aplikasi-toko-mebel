@@ -3,7 +3,7 @@ import './CSS/LoginSignup.css';
 
 const Loginsignup = () => {
   if(localStorage.getItem('auth-token')){
-    window.location.href = '/';
+    window.location.replace("/")
   }
   // Nyambungin ke backend
   const [state,setState] = useState("Login");
@@ -50,7 +50,7 @@ const Loginsignup = () => {
       localStorage.setItem('auth-token',responseData.token);
       localStorage.setItem('isAdmin', responseData.isAdmin);
       if(responseData.isAdmin){
-        window.location.href = '/admin';
+        window.location.replace("/admin");
         return 0
       }
       else{

@@ -18,16 +18,20 @@ const ListProduct = () => {
     }, [])
 
     const remove_product = async(id)=>{
-      await fetch('https://api-msib-6-toko-mebel-02.educalab.id/removeproduct', {
-        method:'DELETE',
-        headers:{
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'auth-token' : token
-        },
-        body:JSON.stringify({id:id})
-      })
-      await fetchInfo();
+      const userConfirmed = window.confirm('Yakin ingin menghapus Produk?');
+      if(userConfirmed){
+        await fetch('https://api-msib-6-toko-mebel-02.educalab.id/removeproduct', {
+          method:'DELETE',
+          headers:{
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'auth-token' : token
+          },
+          body:JSON.stringify({id:id})
+        })
+        await fetchInfo();
+      }
+
     }
 
   return (

@@ -1,3 +1,4 @@
+import '../../Pages/CSS/Load.css'
 import { useState } from 'react'
 import './AddProduct.css'
 import upload_area from '../Assets/upload_area.svg'
@@ -37,7 +38,10 @@ const AddProduct = () => {
       body:formData,
     }).then((resp)=>resp.json()).then((data)=>{responseData=data})
 
-    if(responseData.success)
+    if (!responseData) {
+      return <div className='Load'>Loading...</div>; 
+    }
+    else
     {
       product.image = responseData.image_url;
       console.log(product);

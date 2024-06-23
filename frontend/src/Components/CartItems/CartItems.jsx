@@ -1,3 +1,4 @@
+import '../../Pages/CSS/Load.css'
 import React, { useContext } from 'react'
 import './CartItems.css'
 // import Product from '../../../../backend/model/Product'
@@ -18,7 +19,9 @@ const CartItems = () => {
       const { _id, __v, date, ...item } = cartItem; 
       return { ...item, quantity: cartItems[cartItem.id] };
     });;
-    console.log(cartItemsList);
+    if (!cartItemsList) {
+      return <div className='Load'>Loading...</div>; 
+    }
   return (
     <div className='cartitems'>
       <div className="cartitems-format-main">
