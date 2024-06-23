@@ -1,6 +1,7 @@
 const Product = require('../model/Product.js'); 
 const Users = require('../model/user.js');
-const port = 4000;
+const cloudinary = require('../library/cloudynaryConfig.js')
+
 
 // Controller untuk menambahkan Item di cart
 const addToCart = async (req, res) => {
@@ -171,10 +172,22 @@ const UploadIMG = async(req,res)=>{
         res.status(401).send({error: "User is not an Admin"})
         return 0;
     }else{
-        res.json({
-            success : 1,
-            image_url : `${process.env.SERVER_URL}/images/${req.file.filename}`
-        })
+        try {
+            // Check if file exists
+            if (!req.file) {
+                return res.status(400).json({ error: 'No file uploaded' });
+            }
+    
+            // Upload image to Cloudinary
+            const result = await cloudinary.uploader.upload(req.file.path);
+    
+            // Respond with image URL from Cloudinary
+            res.status(200).json({ success: true, image_url: result.secure_url });
+        } catch (err) {
+            console.error('Error uploading image:', err);
+            res.status(500).json({ error: 'Failed to upload image' });
+        }
+       
     }
 }
 
