@@ -83,7 +83,7 @@ const ReviewForm = ({ review, onSave }) => {
   };
 
   return (
-    <div>
+    <div className='review-form'>
       {successMessage && <p className="success-message">{successMessage}</p>}
       <form onSubmit={handleSubmit}>
         <label>
