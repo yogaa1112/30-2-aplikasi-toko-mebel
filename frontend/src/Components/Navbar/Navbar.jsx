@@ -19,7 +19,7 @@ const Navbar = () => {
 
     const searchHandler = async ()=>{
         try {
-            const response = await axios.get(`http://localhost:4000/search?query=${searchQuery}`);
+            const response = await axios.get(`https://api-msib-6-toko-mebel-02.educalab.id/search?query=${searchQuery}`);
             setSearchResults(response.data);
             setShowResults(true);
         } catch (error) {

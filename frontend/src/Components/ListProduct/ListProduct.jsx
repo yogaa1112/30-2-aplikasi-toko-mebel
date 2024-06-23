@@ -8,7 +8,7 @@ const ListProduct = () => {
     
     const token = localStorage.getItem('auth-token')
     const fetchInfo = async ()=>{
-      await fetch ('http://localhost:4000/allproducts')
+      await fetch ('https://api-msib-6-toko-mebel-02.educalab.id/allproducts')
       .then((res)=>res.json())
       .then((data)=>{setAllProducts(data)});
     }
@@ -18,7 +18,7 @@ const ListProduct = () => {
     }, [])
 
     const remove_product = async(id)=>{
-      await fetch('http://localhost:4000/removeproduct', {
+      await fetch('https://api-msib-6-toko-mebel-02.educalab.id/removeproduct', {
         method:'DELETE',
         headers:{
           Accept: 'application/json',

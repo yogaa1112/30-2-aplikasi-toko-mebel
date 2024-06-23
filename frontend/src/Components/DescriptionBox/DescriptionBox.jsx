@@ -14,7 +14,7 @@ const DescriptionBox = () => {
 
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/reviews/${productId}`);
+        const response = await axios.get(`https://api-msib-6-toko-mebel-02.educalab.id/reviews/${productId}`);
         const reviewsData = response.data;
 
         console.log('Fetched reviews data:', reviewsData);

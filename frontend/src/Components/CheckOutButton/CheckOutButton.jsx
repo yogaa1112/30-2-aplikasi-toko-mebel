@@ -10,7 +10,7 @@ const CheckOutButton = ({cartItems}) => {
             alert("Please Login first")
             window.location.href = '/login';
         }
-        axios.post("http://localhost:4000/checkout", {
+        axios.post("https://api-msib-6-toko-mebel-02.educalab.id/checkout", {
             cartItems,
             userEmail
         }).then((res)=>{

@@ -21,7 +21,7 @@ const ReviewForm = ({ review, onSave }) => {
   const fetchPaymentIntentId = async () => {
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await fetch(`http://localhost:4000/api/orders/${productId}`, { // Perhatikan url /api/orders
+      const response = await fetch(`https://api-msib-6-toko-mebel-02.educalab.id/api/orders/${productId}`, { // Perhatikan url /api/orders
         method: 'GET',
         headers: {
           'auth-token': token,
@@ -52,7 +52,7 @@ const ReviewForm = ({ review, onSave }) => {
       comment,
     };
 
-    const url = review ? `http://localhost:4000/reviews/${review._id}` : 'http://localhost:4000/reviews/add';
+    const url = review ? `https://api-msib-6-toko-mebel-02.educalab.id/reviews/${review._id}` : 'https://api-msib-6-toko-mebel-02.educalab.id/reviews/add';
     const method = review ? 'PUT' : 'POST';
 
     try {

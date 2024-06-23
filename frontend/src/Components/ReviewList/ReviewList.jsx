@@ -21,7 +21,7 @@ const ReviewList = () => {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await fetch('http://localhost:4000/api/orders', {
+      const response = await fetch('https://api-msib-6-toko-mebel-02.educalab.id/api/orders', {
         method: 'GET',
         headers: {
           'auth-token': token,
@@ -42,7 +42,7 @@ const ReviewList = () => {
 
   const fetchReviews = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:4000/reviews/${productId}`);
+      const response = await fetch(`https://api-msib-6-toko-mebel-02.educalab.id/reviews/${productId}`);
       if (!response.ok) {
         throw new Error('Error fetching reviews');
       }
@@ -59,7 +59,7 @@ const ReviewList = () => {
       const token = localStorage.getItem('auth-token');
       const userId = localStorage.getItem('user-id');
 
-      const response = await fetch(`http://localhost:4000/reviews/${reviewId}`, {
+      const response = await fetch(`https://api-msib-6-toko-mebel-02.educalab.id/reviews/${reviewId}`, {
         method: 'PUT',
         headers: {
           'auth-token': token,
@@ -85,7 +85,7 @@ const ReviewList = () => {
     try {
       const token = localStorage.getItem('auth-token');
 
-      const response = await fetch(`http://localhost:4000/reviews/${reviewId}`, {
+      const response = await fetch(`https://api-msib-6-toko-mebel-02.educalab.id/reviews/${reviewId}`, {
         method: 'DELETE',
         headers: {
           'auth-token': token,

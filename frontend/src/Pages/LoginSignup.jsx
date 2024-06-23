@@ -35,7 +35,7 @@ const Loginsignup = () => {
     
     console.log("Login Success");
     let responseData;
-    await fetch('http://localhost:4000/login',{
+    await fetch('https://api-msib-6-toko-mebel-02.educalab.id/login',{
       method:'POST',
       headers:{
         Accept:'application/form-data',
@@ -67,7 +67,7 @@ const Loginsignup = () => {
   const signup = async () =>{
     // console.log("Signup Sucses",formData);
     let responseData;
-    await fetch('http://localhost:4000/signup',{
+    await fetch('https://api-msib-6-toko-mebel-02.educalab.id/signup',{
       method:'POST',
       headers:{
         Accept:'application/form-data',

@@ -16,7 +16,7 @@ const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState(getDefaultCart());
 
     useEffect(()=>{
-        fetch('http://localhost:4000/allproducts')
+        fetch('https://api-msib-6-toko-mebel-02.educalab.id/allproducts')
         .then((response)=>{
             if (!response.ok) {
             throw new Error('Failed to fetch all products');
@@ -33,7 +33,7 @@ const ShopContextProvider = (props) => {
         .catch(error => {
           console.error('Error fetching all products:', error);})
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/getcart', {
+            fetch('https://api-msib-6-toko-mebel-02.educalab.id/getcart', {
                 method: 'POST',
                 headers:{
                     Accept: 'application/form-data',
@@ -49,7 +49,7 @@ const ShopContextProvider = (props) => {
     const addToCart = (itemId)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/addtocart', {
+            fetch('https://api-msib-6-toko-mebel-02.educalab.id/addtocart', {
                 method: 'POST',
                 headers:{
                     Accept: 'application/form-data',
@@ -63,7 +63,7 @@ const ShopContextProvider = (props) => {
     const removeFromCart = (itemId)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/removefromcart', {
+            fetch('https://api-msib-6-toko-mebel-02.educalab.id/removefromcart', {
                 method: 'POST',
                 headers:{
                     Accept: 'application/form-data',
@@ -91,7 +91,7 @@ const ShopContextProvider = (props) => {
     const clearCart = ()=>{
         if(localStorage.getItem('auth-token')){
             try {
-                fetch("http://localhost:4000/clearcart", {
+                fetch("https://api-msib-6-toko-mebel-02.educalab.id/clearcart", {
                     method:'POST',
                     headers:{
                         Accept: 'application/form-data',

@@ -6,7 +6,7 @@ const Popular = () => {
 
   const [popularProducts,setPopularProducts] = useState([]);
   useEffect(()=>{
-    fetch('http://localhost:4000/popular-in-office')
+    fetch('https://api-msib-6-toko-mebel-02.educalab.id/popular-in-office')
     .then((response)=>response.json())
     .then((data)=>setPopularProducts(data));
   },[])
